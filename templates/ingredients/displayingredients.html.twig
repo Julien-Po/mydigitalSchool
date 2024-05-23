@@ -1,0 +1,9 @@
+{% block body %}
+    <div>
+    {% for ingredient in ingredients %}
+        <h2 class="detailTitle">{{ingredient.name}}</h2>
+        <h2 class="detailTitle">{{ingredient.allergene}}</h2>
+        <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt={{ingredient.name}}
+    </div>
+{% endfor %}
+{% endblock %}
