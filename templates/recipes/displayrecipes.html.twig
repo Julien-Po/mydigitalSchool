@@ -1,0 +1,12 @@
+{% block body %}
+    <div>
+        {% for recipe in recipes %}
+            {% for ingredient in recipe.ingredients %}
+                <div>
+                    <h3>{{ ingredient.name }}</h3>
+                    <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}">
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endblock %}

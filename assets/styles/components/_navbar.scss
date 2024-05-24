@@ -1,0 +1,146 @@
+.mainHeader {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 65px;
+    width: 90%;
+    padding: 0 10vw;
+    color: black;
+    z-index: 1;
+    transition: .4s ease-out;
+
+    .imgLogo {
+        width: 50px;
+        height: 50px;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+        text-transform: uppercase;
+    }
+
+    .navLinks {
+        display: flex;
+
+        .navLink {
+
+            a {
+                margin: .2rem;
+                padding: 1rem .5rem;
+            }
+
+            a:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
+        }
+    }
+
+    .menuIcon {
+        position: relative;
+        padding: 26px 10px;
+        z-index: 1;
+        cursor: pointer;
+        display: none;
+
+        .menuIconLine {
+            display: block;
+            position: relative;
+            background: #000;
+            height: 2px;
+            width: 20px;
+            border-radius: 4px;
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                border-radius: 4px;
+                background: #000;
+                transition: background .8s ease;
+            }
+
+            &::before {
+                transform: translateY(-5px);
+            }
+
+            &::after {
+                transform: translateY(5px);
+            }
+        }
+    }
+
+    .menuBtn {
+        display: none;
+        position: absolute;
+    }
+
+    &.scrolled {
+        height: 50px;
+        background: rgba(0, 0, 0, 0.9);
+        color: #fff;
+
+        .menuIcon {
+
+            .menuIconLine,
+            .menuIconLine::before,
+            .menuIconLine::after {
+                background: white;
+            }
+        }
+    }
+}
+
+@media screen and (max-width:767px) {
+    .mainHeader {
+        .menuIcon {
+            display: block;
+        }
+
+        .navLinks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 10rem 0;
+            width: 100vw;
+            height: 100vh;
+            font-size: 2rem;
+            color: white;
+            background: #000;
+            transition:
+                opacity .8s .5s, clip-path 1s .5s;
+            clip-path: circle(200px at top right);
+        }
+
+        .menuBtn:checked~.navLinks {
+            opacity: 1;
+            clip-path: circle(100% at center);
+            transform: translateY(-10%);
+        }
+
+        .menuBtn:not(:checked)~.navLinks {
+            transform: translateY(-10%);
+        }
+
+        .menuBtn:checked~.menuIcon {
+            .menuIconLine {
+                background: #fff;
+
+                &::before {
+                    background: #fff;
+                }
+
+                &::after {
+                    background: #fff;
+                }
+            }
+        }
+    }
+}

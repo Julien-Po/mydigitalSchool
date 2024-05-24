@@ -1,0 +1,16 @@
+{% block body %}
+
+
+<div>
+{{ form_start(form) }}
+
+{{form_row(form.ingredients)}}
+
+{{form_label(form.submit)}}
+{{ form_row(form.submit)}}
+
+{{form_end(form)}}
+
+</div>
+
+{% endblock %}

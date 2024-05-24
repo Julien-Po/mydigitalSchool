@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\IngredientsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: IngredientsRepository::class)]
@@ -24,6 +26,17 @@ class Ingredients
 
     #[ORM\ManyToOne(inversedBy: 'ingredients')]
     private ?Genre $genre = null;
+
+    /**
+     * @var Collection<int, Recipes>
+     */
+    #[ORM\ManyToMany(targetEntity: Recipes::class, mappedBy: 'ingredients')]
+    private Collection $recipes;
+
+    public function __construct()
+    {
+        $this->recipes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,6 +87,33 @@ class Ingredients
     public function setGenre(?Genre $genre): static
     {
         $this->genre = $genre;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Recipes>
+     */
+    public function getRecipes(): Collection
+    {
+        return $this->recipes;
+    }
+
+    public function addRecipe(Recipes $recipe): static
+    {
+        if (!$this->recipes->contains($recipe)) {
+            $this->recipes->add($recipe);
+            $recipe->addIngredient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipe(Recipes $recipe): static
+    {
+        if ($this->recipes->removeElement($recipe)) {
+            $recipe->removeIngredient($this);
+        }
 
         return $this;
     }
