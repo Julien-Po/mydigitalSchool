@@ -2,17 +2,12 @@
 
 {% block body %}
 
-<h1 class="genreTitle">Edition d'un genre</h1>
-
-<div>
-{{ form_start(form) }}
-
-{{form_widget(form.name)}}
-
-{{ form_row(form.submit)}}
-
-{{form_end(form)}}
-
-</div>
-
+    <div class="newGenre">
+        <h1 class="articleTitle titlecolor">Création d'un genre</h1>
+        {{ form_start(form) }}
+        {{ form_widget(form.name) }}
+        <div class="submitGenre">{{ form_row(form.submit) }}</div>
+        {{ form_end(form) }}
+    </div>
+    
 {% endblock %}
