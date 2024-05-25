@@ -1,34 +1,48 @@
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
-{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Titre par défaut{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
+    {% endblock %}
+</head>
+<body>
+    <header class="mainHeader">
+        <div class="logo">
+            <a href="/">
+                <img class="imgLogo" src="{{ asset('img/logoSelect.png') }}" alt="logoLr">
+            </a>
+        </div>
+        <input type="checkbox" class="menuBtn" id="menuBtn">
+        <label for="menuBtn" class="menuIcon">
+            <span class="menuIconLine"></span>
+        </label>
 
+        <ul class="navLinks">
+            <li class="navLink">
+                <a href="/login">Connexion</a>
+            </li>
+            <li class="navLink">
+                <a href="/article">News</a>
+            </li>
+            <li class="navLink">
+                <a href="#">Nos produits</a>
+            </li>
+            <li class="navLink">
+                <a href="/join">Nous rejoindre</a>
+            </li>
+        </ul>
+        <script src="{{ asset('js/navbar.js') }}"></script>
+    </header>
 
-	<header class="mainHeader">
-		<div class="logo">
-			<a href="/">
-				<img class="imgLogo" src="{{ asset('img/lol.png') }}" alt="logoLr"></img>
-		</a>
-	</div>
-		<input type="checkbox" class="menuBtn" id="menuBtn">
-		<label for="menuBtn" class="menuIcon">
-			<span class="menuIconLine"></span>
-		</label>
-	
+    <main>
+        {% block body %}
+        {% endblock %}
+    </main>
 
-	<ul class="navLinks">
-
-		<li class="navLink">
-			<a href="/login">Connexion</a>
-		</li>
-		<li class="navLink">
-			<a href="/article">News</a>
-		</li>
-		<li class="navLink">
-			<a href="">Nos produits</a>
-		</li>
-		<li class="navLink">
-			<a href="/join">Nous rejoindre</a>
-		</li>
-	</ul>
-	<script src="{{ asset('js/navbar.js') }}"></script>
-	</header>
+    {% block javascripts %}
+        <!-- Vous pouvez inclure des fichiers JavaScript ici -->
+    {% endblock %}
+</body>
+</html>

@@ -15,9 +15,10 @@ class GenreType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nom'
+                'label' => 'Nom',
             ])
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class
+            )
         ;
     }
 

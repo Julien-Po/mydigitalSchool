@@ -1,7 +1,22 @@
+{% extends 'commons/base.html.twig' %}
+
 {% block body %}
-    <div>
-    {% for genre in genres %}
-        <h2 class="detailTitle">{{genre.name}}</h2>  
-    </div>
-{% endfor %}
+
+<div class="tableGenre">
+    <table>
+        <thead>
+            <tr>
+                <th>Liste des genres</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for genre in genres %}
+                <tr>
+                    <td>{{ genre.name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 {% endblock %}

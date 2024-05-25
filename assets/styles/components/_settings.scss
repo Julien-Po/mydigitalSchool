@@ -1,3 +1,14 @@
+$titlecolor : #A28C3B;
+$text : #EFE7DA;
+
+// * {
+//     background-color: #041E2A;
+// }
+
 li {
     list-style-type: none;
+}
+
+.titlecolor {
+    color: $titlecolor;
 }
