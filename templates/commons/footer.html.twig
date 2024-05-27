@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+ {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
+    {% endblock %}
+</head>
+
+<body>
+    <footer class="footer">
+        <div class ="footerElements">
+            <a href="/">
+                <img class="imgLogo" src="{{ asset('img/Logo.png') }}" alt="logoselecteat">
+            </a>
+             <a href="" class= "mentions">Mentions légales</a>
+            <div>
+                <img class="imgTwitter mediaImg" src="{{ asset('img/twitterlogo.svg') }}" alt="logoX">
+                <img class="imginstagram mediaImg" src="{{ asset('img/instalogo.png') }}" alt="logoInsta">
+                <img class="imgTiktok mediaImg" src="{{ asset('img/tiktoklogo.svg') }}" alt="logoTiktok">
+            </div>
+        </div>
+    </footer>
+ </body>
+</html>

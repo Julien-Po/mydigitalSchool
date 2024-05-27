@@ -1,0 +1,46 @@
+.footer {
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.footerElements {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.footerElements .imgLogo {
+    width: 50px;
+    height: 50px;
+}
+
+.footerElements .mediaImg {
+    width: 50px;
+    height: 50px;
+}
+
+.footerElements .mentions {
+    font-size: 25px;
+    text-decoration: none;
+}
+
+.footerElements .mentions:visited {
+    color: black;
+}
+
+@media screen and (max-width: 500px) {
+    .footerElements .imgLogo {
+        width: 35px;
+        height: 35px;
+    }
+
+    .footerElements .mediaImg {
+        width: 35px;
+        height: 35px;
+    }
+
+    .footerElements .mentions {
+        font-size: 20px;
+    }
+}

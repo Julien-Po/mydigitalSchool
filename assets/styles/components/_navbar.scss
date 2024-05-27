@@ -29,6 +29,7 @@
             a {
                 margin: .2rem;
                 padding: 1rem .5rem;
+                color: $text;
             }
 
             a:hover {
@@ -84,7 +85,6 @@
         color: #fff;
 
         .menuIcon {
-
             .menuIconLine,
             .menuIconLine::before,
             .menuIconLine::after {
@@ -144,3 +144,4 @@
         }
     }
 }
+
