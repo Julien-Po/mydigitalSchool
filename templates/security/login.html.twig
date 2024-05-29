@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SecurityController!{% endblock %}
+
+{% block body %}
+
+<form action ="{{ path('app_security')}}">
+
+<div>
+    <label for="username">Adresse email</label>
+    <input type="email" placeholder = "exemple@gmail.com" name="_username"></input>
+</div>
+
+<div>
+    <label for="password">Mot de passe</label>
+    <input type="password" name="_password" placeholder="*******"></input>
+</div>
+
+<button type="submit">Se connecter</button>
+
+</form>
+
+{% endblock %}
