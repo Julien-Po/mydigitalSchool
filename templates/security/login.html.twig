@@ -1,14 +1,17 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %} #}
 
 {% block title %}Hello SecurityController!{% endblock %}
 
 {% block body %}
 
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security')}}</div>
+{% endif %}
 <form action ="{{ path('app_security')}}">
 
 <div>
     <label for="username">Adresse email</label>
-    <input type="email" placeholder = "exemple@gmail.com" name="_username"></input>
+    <input type="email" placeholder = "exemple@gmail.com" name="_username" value="{{ last_username }}"></input>
 </div>
 
 <div>
