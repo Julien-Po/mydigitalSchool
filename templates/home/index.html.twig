@@ -1,6 +1,6 @@
-{% include 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block body %}
+{% block main %}
     <header>
             <div class="bannerImg">
                 <img src="{{ asset('/img/fondresto.png') }}" alt="" class="">
@@ -8,7 +8,6 @@
 
             <h1 class="titlecolor center">Notre Histoire</h1>
     </header>
-    <main>
         <section>
             <div class="homeSection">
                 <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
@@ -33,7 +32,6 @@
                 <img src="{{ asset('/img/instalogo.png') }}" alt="" class="">
             </div>
         </section>
-    </main>
-
+   
 
 {% endblock %}

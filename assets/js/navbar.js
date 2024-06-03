@@ -1,10 +1,15 @@
-const header = document.querySelector(".mainHeader");
+const main = document.querySelector(".mainHeader");
+const menuBtn = document.querySelector(".menuBtn");
 
 window.addEventListener("scroll", () => {
   const scrollPosition = window.scrollY;
   if (scrollPosition > 10) {
-    header.classList.add("scrolled");
+    main.classList.add("scrolled");
   } else {
-    header.classList.remove("scrolled");
+    main.classList.remove("scrolled");
   }
+});
+
+menuBtn.addEventListener("click", () => {
+  main.classList.toggle("menu-open");
 });

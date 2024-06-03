@@ -1,0 +1,50 @@
+@media screen and (max-width:767px) {
+    .mainHeader {
+        .menuIcon {
+            display: block;
+        }
+
+        .navLinks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 10rem 0;
+            width: 100vw;
+            height: 100vh;
+            font-size: 2rem;
+            color: white;
+            background: #000;
+            transition:
+                opacity .8s .5s, clip-path 1s .5s;
+            clip-path: circle(200px at top right);
+        }
+
+        .menuBtn:checked~.navLinks {
+            opacity: 1;
+            clip-path: circle(100% at center);
+            transform: translateY(-10%);
+        }
+
+        .menuBtn:not(:checked)~.navLinks {
+            transform: translateY(-10%);
+        }
+
+        .menuBtn:checked~.menuIcon {
+            .menuIconLine {
+                background: #fff;
+
+                &::before {
+                    background: #fff;
+                }
+
+                &::after {
+                    background: #fff;
+                }
+            }
+        }
+    }
+}

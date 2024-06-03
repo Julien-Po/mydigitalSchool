@@ -17,14 +17,20 @@
 
 </header>
 
+<main>
+
+{% block main %}{% endblock %}
+
+</main>
+
 <footer>
 
 {% include 'commons/footer.html.twig' %}
 
 </footer>
-
+{% block javascript %}
  <script src="{{ asset('js/navbar.js') }}"></script>
-
+{% endblock %}
 </body>
 
 
