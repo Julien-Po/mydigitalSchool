@@ -29,7 +29,7 @@ class IngredientsType extends AbstractType
             ])
             ->add('genre', EntityType::class, [
                 'class' => Genre::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
             ->add('submit', SubmitType::class, 
             ["label" => "Envoyer"])

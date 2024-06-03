@@ -86,6 +86,6 @@ class IngredientsController extends AbstractController
                 'Votre ingredient a été supprimé avec succès !'
             );
 
-        return $this->redirectToRoute('app_ingredients');
+        return $this->redirectToRoute('display_ingredients');
     }
 }   
