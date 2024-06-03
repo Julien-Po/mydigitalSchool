@@ -1,8 +1,8 @@
-{% extends 'commons/navbar.html.twig' %}
+{% include 'base.html.twig' %}
 
 {% block body %}
 
-<div>
+<div class="new">
 {{ form_start(form) }}
 
 {{form_label(form.name)}}

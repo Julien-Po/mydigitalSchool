@@ -26,6 +26,8 @@ class GenreController extends AbstractController
 
                $manager->persist($genre);
                $manager->flush();
+
+               return $this->redirectToRoute('view_genre');
             }
 
             return $this->render('genre/new.html.twig',[
@@ -44,28 +46,30 @@ class GenreController extends AbstractController
         ]);
     }
 
-    #[Route('/genre/update/{id}', name: 'edit_genre', methods:['GET','POST'])]
-    public function editGenre(GenreRepository $repository, int $id, Request $request, EntityManagerInterface $manager) : Response
+    #[Route('/genre/update/{id}', name: 'edit_genre', methods: ['GET', 'POST'])]
+    public function editGenre(GenreRepository $repository, int $id, Request $request, EntityManagerInterface $manager): Response
     {
-
-        $genre = new Genre();
         $genre = $repository->findOneBy(["id" => $id]);
-        $form = $this->createForm(GenreType::class, $genre);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid())
-        {
-           $genre = $form->getData();
-
-           $manager->persist($genre);
-           $manager->flush();
+        
+        if (!$genre) {
+            throw $this->createNotFoundException('Genre not found');
         }
-      
+    
         $form = $this->createForm(GenreType::class, $genre);
-        return $this->render('genre/edit.html.twig',[
-            'form' => $form->createView()
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($genre);
+            $manager->flush();
+    
+            return $this->redirectToRoute('view_genre');
+        }
+    
+        return $this->render('genre/edit.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
+    
 
     #[Route('/genre/delete/{id}', name : 'delete_genre', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Genre $genre) : Response
@@ -78,6 +82,6 @@ class GenreController extends AbstractController
                 'Votre genre a été supprimé avec succès !'
             );
 
-        return $this->redirectToRoute('app_genre');
+        return $this->redirectToRoute('view_genre');
     }
 }

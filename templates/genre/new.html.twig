@@ -1,8 +1,8 @@
-{% extends 'commons/navbar.html.twig' %}
+{% include 'base.html.twig' %}
 
 {% block body %}
 
-    <div class="newGenre">
+    <div class="new">
         <h1 class="articleTitle titlecolor">Création d'un genre</h1>
         {{ form_start(form) }}
         {{ form_widget(form.name) }}

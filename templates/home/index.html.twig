@@ -1,17 +1,39 @@
-{% extends 'commons/navbar.html.twig' %}
-
-{% block title %}Hello HomeController!{% endblock %}
-
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
-{% endblock %}
+{% include 'base.html.twig' %}
 
 {% block body %}
     <header>
             <div class="bannerImg">
-            
+                <img src="{{ asset('/img/fondresto.png') }}" alt="" class="">
             </div>
+
+            <h1 class="titlecolor center">Notre Histoire</h1>
     </header>
-{% include 'commons/footer.html.twig' %}
+    <main>
+        <section>
+            <div class="homeSection">
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                <img src="{{ asset('/img/instalogo.png') }}" alt="" class="">
+            </div>
+        </section>
+        <section>
+            <div class="homeSection">
+                <img src="{{ asset('/img/instalogo.png') }}" alt="" class="">
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+            </div>
+        </section>
+            <section>
+            <div class="homeSection">
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                <img src="{{ asset('/img/instalogo.png') }}" alt="" class="">
+            </div>
+        </section>
+    </main>
+
 
 {% endblock %}

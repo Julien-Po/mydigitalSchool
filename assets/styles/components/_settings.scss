@@ -3,7 +3,15 @@ $text : #EFE7DA;
 
 * {
     // background-color: #041E2A;
-    overflow: hidden;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    position: relative;
+    min-height: 100vh;
 }
 
 li {
@@ -14,4 +22,10 @@ li {
     color: $titlecolor;
 }
 
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 

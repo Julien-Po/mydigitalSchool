@@ -1,8 +1,8 @@
-{% extends 'commons/navbar.html.twig' %}
+{% include 'base.html.twig' %}
 
 {% block body %}
 
-<div class="tableGenre">
+<div class="table">
     <table>
         <thead>
             <tr>
@@ -12,7 +12,11 @@
         <tbody>
             {% for genre in genres %}
                 <tr>
-                    <td>{{ genre.name }}</td>
+                    <td>
+                        {{ genre.name }}
+                        <a href="{{ path('edit_genre', { 'id': genre.id }) }}">Modifier</a>
+                        <a href="{{ path('delete_genre', { 'id': genre.id }) }}">Supprimer</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

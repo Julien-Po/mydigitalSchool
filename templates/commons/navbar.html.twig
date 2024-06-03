@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Titre par défaut{% endblock %}</title>
-    {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
-    {% endblock %}
-</head>
+
 <body>
-    <header class="mainHeader">
+    <nav class="mainHeader">
         <div class="logo">
             <a href="/">
                 <img class="imgLogo" src="{{ asset('img/Logo.png') }}" alt="logoLr">
@@ -33,15 +27,7 @@
                 <a href="/join">Nous rejoindre</a>
             </li>
         </ul>
-    </header>
 
-    <main>
-        {% block body %}
-        {% endblock %}
-    </main>
-
-    {% block javascripts %}
-        <script src="{{ asset('js/navbar.js') }}"></script>
-    {% endblock %}
+    </nav>
 </body>
 </html>
