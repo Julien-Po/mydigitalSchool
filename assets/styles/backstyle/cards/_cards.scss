@@ -1,16 +1,17 @@
 .cards-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px; /* Espace entre les cartes */
+  gap: 80px; /* Espace entre les cartes */
   padding: 16px;
 }
 
 .card {
-  border: 1px solid #ddd;
+  // border: 1px solid #ddd;
   border-radius: 8px;
   padding: 16px;
-  background-color: #fff;
+  background-color: hwb(0 100% 0% / 0.582);
   text-align: center;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .card img {

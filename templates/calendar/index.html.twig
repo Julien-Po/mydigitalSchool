@@ -1,0 +1,55 @@
+{# {% extends 'base.html.twig' %} #}
+
+{% block title %}Calendar index{% endblock %}
+
+{% block main %}
+    <div id="calendar"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js" 
+    integrity="sha256-hk2Q9BXDSq54aGHbj6/T9up41uNJ5tLQw49s0HqWfPw=" crossorigin="anonymous"></script>
+
+    {% block javascripts %} 
+    <script> 
+    window.onload = () => {
+        let calendarElt = document.querySelector("#calendar")
+
+        let calendar = new FullCalendar.Calendar(calendarElt, {
+            initialView: 'dayGridMonth',
+            locale: 'fr',
+            timeZone: 'Europe/Paris',
+            headerToolbar: {
+                start: 'prev,next today',
+                center : 'title',
+                end: 'dayGridMonth,timeGridWeek',
+                startTime: '9:00',
+                endTime: '17:30'
+            },
+            events: {{data|raw}},
+            editable: true,
+        })
+
+        calendar.on('eventChange', (e) => {
+            let url = `/ajax/${e.event.id}`;
+            let data = {
+                "title": e.event.title,
+                "description": e.event.extendedProps.description,
+                "start": e.event.start,
+                "end": e.event.end,
+                "backgroundColor": e.event.backgroundColor,
+                "borderColor": e.event.borderColor, 
+                "textColor": e.event.textColor
+            }
+            console.log(data);
+
+            let xhr = new XMLHttpRequest();
+
+            xhr.open("PUT", url);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify(data));
+        })
+
+        calendar.render();
+    }
+    </script>
+    {% endblock %}
+{% endblock %}

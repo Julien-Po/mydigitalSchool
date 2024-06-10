@@ -35,6 +35,8 @@ class IngredientsController extends AbstractController
 
                $manager->persist($ingredients);
                $manager->flush();
+
+            //    return $this->redirectToRoute('display_ingredients');
             }
 
             return $this->render('ingredients/new.html.twig',[
@@ -67,6 +69,8 @@ class IngredientsController extends AbstractController
 
            $manager->persist($ingredients);
            $manager->flush();
+
+           return $this->redirectToRoute('display_ingredients');
         }
       
         $form = $this->createForm(IngredientsType::class, $ingredients);

@@ -53,4 +53,15 @@ class ContactController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    // public function findUserByEmailOrUsername(string $usernameOrEmail): ?User 
+    // {
+    //     return $this->createQueryBuilder('u')
+    //             ->where('u.email = :identifier')
+    //             ->orWhere('u.username = :identifier')
+    //             ->setParameter('identifier' , $usernameOrEmail)
+    //             ->setMaxResults(1)
+    //             ->getQuery()
+    //             ->getSingleResult();
+    // }
 }

@@ -33,6 +33,9 @@ class Ingredients
     #[ORM\ManyToMany(targetEntity: Recipes::class, mappedBy: 'ingredients')]
     private Collection $recipes;
 
+    #[ORM\Column]
+    private ?float $Price = null;
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
@@ -114,6 +117,18 @@ class Ingredients
         if ($this->recipes->removeElement($recipe)) {
             $recipe->removeIngredient($this);
         }
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->Price;
+    }
+
+    public function setPrice(float $Price): static
+    {
+        $this->Price = $Price;
 
         return $this;
     }

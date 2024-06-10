@@ -16,7 +16,8 @@ class GenreController extends AbstractController
     #[Route('/newgenre', name: 'app_genre', methods:['GET','POST'])]
     public function createGenre(Request $request, EntityManagerInterface $manager): Response
     {
-            $genre = new Genre ();
+
+            $genre = new Genre();
             $form = $this->createForm(GenreType::class, $genre);
 
             $form->handleRequest($request);

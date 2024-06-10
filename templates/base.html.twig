@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Titre par défaut{% endblock %}</title>
@@ -8,30 +7,18 @@
         <link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
     {% endblock %}
 </head>
-
 <body>
-
-<header>
-
-{# {% include 'commons/navbar.html.twig' %} #}
-
-</header>
-
-<main>
-
-{% block main %}{% endblock %}
-
-</main>
-
-<footer>
-
-{# {% include 'commons/footer.html.twig' %} #}
-
-</footer>
-{% block javascript %}
- <script src="{{ asset('js/navbar.js') }}"></script>
-{% endblock %}
+    <header>
+        {% include 'commons/navbar.html.twig' %}
+    </header>
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+    <footer>
+        {% include 'commons/footer.html.twig' %}
+    </footer>
+    {% block javascript %}
+        <script src="{{ asset('js/navbar.js') }}"></script>
+    {% endblock %}
 </body>
-
-
 </html>
