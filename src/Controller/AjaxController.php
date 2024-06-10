@@ -25,11 +25,7 @@ class AjaxController extends AbstractController
         if(
             isset($data->title) && !empty($data->title) &&
             isset($data->start) && !empty($data->start) &&
-            isset($data->end) && !empty($data->end) &&
-            isset($data->description) && !empty($data->description) &&
-            isset($data->backgroundColor) && !empty($data->backgroundColor) && 
-            isset($data->borderColor) && !empty($data->borderColor) &&
-            isset($data->textColor) && !empty($data->textColor)
+            isset($data->description) && !empty($data->description) 
         ){
             $code = 200;
 
@@ -41,11 +37,7 @@ class AjaxController extends AbstractController
             try {
                 $calendar->setTitle($data->title);
                 $calendar->setStart(new DateTime($data->start));
-                $calendar->setEnd(new DateTime($data->end));
                 $calendar->setDescription($data->description);
-                $calendar->setBackgroundColor($data->backgroundColor);
-                $calendar->setBorderColor($data->borderColor);
-                $calendar->setTextColor($data->textColor);
 
                 $em->persist($calendar);
                 $em->flush();

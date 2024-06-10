@@ -18,13 +18,7 @@ class CalendarType extends AbstractType
             ->add('start', DateTimeType::class, [
                 'date_widget' => 'single_text',
             ])
-            ->add('end', DateTimeType::class, [
-                'date_widget' => 'single_text',
-            ])
             ->add('description')
-            ->add('background_color', ColorType::class)
-            ->add('border_color', ColorType::class)
-            ->add('text_color', ColorType::class)
         ;
     }
 

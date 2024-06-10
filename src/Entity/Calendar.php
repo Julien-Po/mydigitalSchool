@@ -20,20 +20,8 @@ class Calendar
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $start = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $end = null;
-
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
-
-    #[ORM\Column(length: 7)]
-    private ?string $background_color = null;
-
-    #[ORM\Column(length: 7)]
-    private ?string $border_color = null;
-
-    #[ORM\Column(length: 7)]
-    private ?string $text_color = null;
 
     public function getId(): ?int
     {
@@ -64,18 +52,6 @@ class Calendar
         return $this;
     }
 
-    public function getEnd(): ?\DateTimeInterface
-    {
-        return $this->end;
-    }
-
-    public function setEnd(\DateTimeInterface $end): static
-    {
-        $this->end = $end;
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
@@ -84,42 +60,6 @@ class Calendar
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getBackgroundColor(): ?string
-    {
-        return $this->background_color;
-    }
-
-    public function setBackgroundColor(string $background_color): static
-    {
-        $this->background_color = $background_color;
-
-        return $this;
-    }
-
-    public function getBorderColor(): ?string
-    {
-        return $this->border_color;
-    }
-
-    public function setBorderColor(string $border_color): static
-    {
-        $this->border_color = $border_color;
-
-        return $this;
-    }
-
-    public function getTextColor(): ?string
-    {
-        return $this->text_color;
-    }
-
-    public function setTextColor(string $text_color): static
-    {
-        $this->text_color = $text_color;
 
         return $this;
     }

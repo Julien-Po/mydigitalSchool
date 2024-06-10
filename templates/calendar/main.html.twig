@@ -8,11 +8,7 @@
               <th>Id</th>
               <th>Title</th>
               <th>Start</th>
-              <th>End</th>
               <th>Description</th>
-              <th>Background_color</th>
-              <th>Border_color</th>
-              <th>Text_color</th>
               <th>actions</th>
           </tr>
       </thead>
@@ -22,11 +18,7 @@
               <td>{{ planning.id }}</td>
               <td>{{ planning.title }}</td>
               <td>{{ planning.start ? planning.start|date('Y-m-d H:i:s') : '' }}</td>
-              <td>{{ planning.end ? planning.end|date('Y-m-d H:i:s') : '' }}</td>
               <td>{{ planning.description }}</td>
-              <td>{{ planning.backgroundColor }}</td>
-              <td>{{ planning.borderColor }}</td>
-              <td>{{ planning.textColor }}</td>
               <td>
                   <a href="{{ path('app_calendar_show', {'id': planning.id}) }}">show</a>
                   <a href="{{ path('app_calendar_edit', {'id': planning.id}) }}">edit</a>

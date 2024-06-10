@@ -33,11 +33,7 @@ class CalendarController extends AbstractController
                 'id' => $event->getId(),
                 'title' => $event->getTitle(),
                 'start' => $event->getStart()->format('Y-m-d H:i:s'),
-                'end' => $event->getEnd()->format('Y-m-d H:i:s'),
-                'description' => $event->getDescription(),
-                'backgroundColor' => $event->getBackgroundColor(),
-                'borderColor' => $event->getBorderColor(),
-                'textColor' => $event->getTextColor()       
+                'description' => $event->getDescription(),      
             ];
         }
     
