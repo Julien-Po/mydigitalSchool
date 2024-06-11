@@ -6,13 +6,20 @@
     background-position: center/cover;
 }
 
+.top {
+    padding-top: 100px;
+}
+
 .homeSection {
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 70%;
-    justify-content: space-around;
     margin: 0 auto;
-    gap: 50px;
+    gap: 20px;
     padding-bottom: 200px;
+
+    
 
     p {
         width: 50%;
@@ -21,5 +28,97 @@
     img {
         width: 30%;
         height: 30%;
+        border-radius: 200px;
     }
 } 
+
+.opinionContainer {
+
+    .imageContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 100px;
+
+      img {
+        width: 30%;
+        height: 30%;
+      }
+    }
+}
+
+.storyContainer {
+    padding-bottom: 200px;
+
+    .storyFlex {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 20px;
+        gap: 20px; /* espace entre les colonnes */
+
+        img {
+            width: 30%;
+            height: auto;
+            margin-left: 150px;
+        }
+
+        .storyText {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 50%;
+
+            a {
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            p {
+                padding-top: 10px;
+                font-size: 1em;
+                text-align: justify;
+                width: 80%;
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+.opinionContainer {
+    padding: 20px;
+    background-color: #f9f9f9;
+    padding-bottom: 200px;
+
+    .opinion_texts {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px; /* espace entre les avis */
+
+        div {
+            flex: 1;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            p {
+                text-align: justify;
+            }
+            
+        }
+    }
+}
+
+@media screen and (max-width:580px)
+{
+    .opinionContainer {
+        display: flex;
+        flex-direction: column;
+    }
+  
+}
+
+
+
+

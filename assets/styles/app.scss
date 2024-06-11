@@ -2,8 +2,11 @@
 @import './pages/home';
 @import './components/navbar';
 @import './components/footer';
-@import './backstyle/genre/creategenre';
 @import './backstyle/genre/genre';
 @import './backstyle/cards/cards';
 @import './components/mediaNavbar';
 @import './components/calendar';
+@import './backstyle/recipes/createrecipes';
+@import './backstyle/recipes/displayrecipes';
+@import './backstyle/form/form';
+@import './backstyle/login/login';

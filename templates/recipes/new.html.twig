@@ -3,26 +3,41 @@
 {% block title %}Choisissez vos ingrédients{% endblock %}
 
 {% block main %}
-<h1>Choisissez vos ingrédients</h1>
-<form id="ingredients-form" action="{{ path('app_recipes') }}" method="post">
-    <div class="cards-container">
-        {% for ingredient in ingredients %}
-            <div class="card">
-                <label for="">{{ ingredient.name }}</label>
-                <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}">
-                <input type="checkbox" name="ingredients[]" value="{{ ingredient.id }}" class="ingredient-checkbox">
-            </div>
-        {% endfor %}
-    </div>
-    <input type="submit">
-</form>
+<h1 class="new">Choisissez vos ingrédients</h1>
 
-<div id="selected-ingredients-container">
-    <h2>Panier</h2>
-    <ul id="selected-ingredients-list"></ul>
+<div class="searchInput">
+    <label for="genre-select">Filtrer par genre :</label>
+    <select id="genre-select">
+        <option value="all">Tous</option>
+        {% for genre in genres %}
+            <option value="{{ genre.id }}">{{ genre.name }}</option>
+        {% endfor %}
+    </select>
 </div>
 
-
+<div class="alignRecipes">
+    <div class="ingredients-container">
+        <form id="ingredients-form" action="{{ path('app_recipes') }}" method="post">
+            <div class="cards-container" id="ingredients-container">
+                {% for ingredient in ingredients %}
+                    <div class="card" data-genre="{{ ingredient.genre.id }}">
+                        <h2 for="">{{ ingredient.name }}</h2>
+                        <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}">
+                        <input type="checkbox" name="ingredients[]" value="{{ ingredient.id }}" class="ingredient-checkbox">
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="recipesSubmit">
+                <input type="submit">
+            </div>
+        </form>
+    </div>
+    
+    <div id="selected-ingredients-container">
+        <h2>Panier</h2>
+        <ul id="selected-ingredients-list"></ul>
+    </div>
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -30,6 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkboxes = form.querySelectorAll('.ingredient-checkbox');
     const selectedIngredientsContainer = document.getElementById('selected-ingredients-container');
     const selectedIngredientsList = document.getElementById('selected-ingredients-list');
+    const genreSelect = document.getElementById('genre-select');
+    const ingredientsContainer = document.getElementById('ingredients-container');
 
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', () => {
@@ -37,17 +54,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    genreSelect.addEventListener('change', () => {
+        filterIngredientsByGenre();
+    });
+
     function updateSelectedIngredients() {
         selectedIngredientsList.innerHTML = '';
         checkboxes.forEach(checkbox => {
             if (checkbox.checked) {
                 const label = checkbox.previousElementSibling.previousElementSibling.textContent;
-                const listItem = document.createElement('li');
+                const listItem = document.createElement('h3');
                 listItem.textContent = label;
                 selectedIngredientsList.appendChild(listItem);
             }
         });
     }
+
+    function filterIngredientsByGenre() {
+        const selectedGenre = genreSelect.value;
+        const cards = ingredientsContainer.querySelectorAll('.card');
+
+        cards.forEach(card => {
+            if (selectedGenre === 'all' || card.getAttribute('data-genre') === selectedGenre) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    filterIngredientsByGenre();
 });
 </script>
 {% endblock %}

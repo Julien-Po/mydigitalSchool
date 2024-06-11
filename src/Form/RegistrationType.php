@@ -20,29 +20,34 @@ class RegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class
-            , [])
-            ->add('plainPassword', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'first_options' => [
-                    'label' => 'Mot de passe',
-                    
-                ],
-                'second_options' => [
-                    'label' => 'Confirmation du mot de passe'
-                ],
-                'invalid_message' => 'Les mots de passe ne correspondent pas.'
-            ])
-            ->add('fullname', TextType::class, [
+        ->add('email', EmailType::class, [])
+        ->add('plainPassword', RepeatedType::class, [
+            'type' => PasswordType::class,
+            'first_options' => [
+                'label' => 'Mot de passe',
                 'attr' => [
-                    'class' => 'registrationFullName'
-                ],
-                'label' => 'Nom/Prénom'
-            ])
-            ->add ('submit', SubmitType::class)
-        ;
-    }
-
+                    'class' => 'passwordInput'
+                ]
+            ],
+            'second_options' => [
+                'label' => 'Confirmation du mot de passe',
+                'attr' => [
+                    'class' => 'passwordInput'
+                ]
+            ],
+            'invalid_message' => 'Les mots de passe ne correspondent pas.'
+        ])
+        ->add('fullname', TextType::class, [
+            'attr' => [
+                'class' => 'registrationFullName'
+            ],
+            'label' => 'Nom/Prénom'
+        ])
+        ->add ('submit', SubmitType::class, [
+            'label' => "S'inscrire",
+        ])
+    ;
+}
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

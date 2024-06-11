@@ -6,19 +6,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Recipes;
-use App\Entity\Ingredients;
-use App\Entity\Genre;
 use App\Repository\IngredientsRepository;
 use App\Repository\RecipesRepository;
+use App\Repository\GenreRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\RecipesType;
 
-
 class RecipesController extends AbstractController
 {
     #[Route('/newrecipes', name: 'app_recipes', methods:['GET','POST'])]
-    public function createRecipes(Request $request, EntityManagerInterface $entityManager, IngredientsRepository $ingredientsRepository): Response
+    public function createRecipes(Request $request, EntityManagerInterface $entityManager, IngredientsRepository $ingredientsRepository, GenreRepository $genreRepository): Response
     {
         $recipes = new Recipes(); 
         // Vérifiez si le formulaire a été soumis
@@ -42,7 +40,6 @@ class RecipesController extends AbstractController
                 // Ajoutez un message flash ou une autre indication de succès
                 $this->addFlash('success', 'Recette créée avec succès!');
             } else {
-                dd('Non Ok');
                 // Ajoutez un message flash ou une autre indication d'erreur
                 $this->addFlash('error', 'Aucun ingrédient sélectionné.');
             }
@@ -51,8 +48,10 @@ class RecipesController extends AbstractController
         }
 
         $ingredients = $ingredientsRepository->findAll();
+        $genres = $genreRepository->findAll();
 
         return $this->render('recipes/new.html.twig', [
+            'genres' => $genres,
             'ingredients' => $ingredients
         ]);
     }
@@ -86,6 +85,7 @@ class RecipesController extends AbstractController
 
            return $this->redirectToRoute('view_recipes');
         }
+
       
         $form = $this->createForm(RecipesType::class, $recipes);
         return $this->render('recipes/edit.html.twig',[

@@ -2,36 +2,65 @@
 
 {% block main %}
     <header>
-            <div class="bannerImg">
-                <img src="{{ asset('/img/fondresto.png') }}" alt="" class="">
-            </div>
-
-            <h1 class="titlecolor center">Notre Histoire</h1>
+        <div class="bannerImg">
+            <img src="{{ asset('/img/fondresto.png') }}" alt="Image de fond du restaurant" class="">
+        </div>
     </header>
-        <section>
+    
+    <main>
+        <section class="top">
             <div class="homeSection">
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-                <img src="{{ asset('/img/instalogo.png') }}" alt="" class="">
+                <p>Commencez votre voyage culinaire avec nos entrées sur mesure</p>
+                <img src="{{ asset('/img/entrees/artichaut.jpeg') }}" alt="Logo Instagram" class="">
             </div>
         </section>
-        <section>
-            <div class="homeSection">
-                <img src="{{ asset('/img/instalogo.png') }}" alt="" class="">
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-            </div>
-        </section>
-            <section>
-            <div class="homeSection">
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-                <img src="{{ asset('/img/instalogo.png') }}" alt="" class="">
-            </div>
-        </section>
-   
 
+        <section>
+            <div class="homeSection">
+                <img src="{{ asset('/img/entrees/laitue.jpeg') }}" alt="Logo Instagram" class="">
+                <p>"Découvrez l'harmonie parfaite de saveurs avec nos plats principaux"</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="homeSection">
+                <p>Terminez en beauté avec nos desserts sucrés, la touche idéale</p>
+                <img src="{{ asset('/img/entrees/tomate.jpeg') }}" alt="Logo Instagram" class="">
+            </div>
+        </section>
+
+        <section class="storyContainer">
+            <div class="storyFlex">
+                <img src="{{ asset('/img/chef.png') }}" alt="Image du chef" class="">
+                <div class="storyText">
+                    <h2 class="title center">Notre histoire</h2>
+                    <p>Select'eat est né de notre passion pour les expériences culinaires uniques. Tout a commencé avec une idée simple : concevoir des plats sur mesure gastronomiques
+                    et de bonne qualité. En tant qu'amateurs de bonne cuisine, nous avons toujours rêvé d'un lieu où chaque repas serait une aventure personnalisée, permettant à chacun de 
+                    créer son propre menu à partir d'ingrédients frais et de qualités. Cette vision a donné naissance à Select'Eat, un restaurant bistronomique où la personnalisation et
+                    l'excellence culinaire sont au coeur de notre offre.  <a href="" class="top">Lire la suite </a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="opinionContainer">
+        <h2 class="title center">Les Avis</h2>
+        <div class="opinion_texts">
+            <div>
+                <h3 class="center">Margot</h3>
+                <p>Une expérience culinaire exceptionnelle dans ce restaurant bistronomique ! J'adore la personnalisation des plats avec des ingrédients frais et de saison.
+                Parfait pour une soirée entre amis. Le service est amical et attentif. Je recommande vivement pour des plats personnalisés à Bordeaux !</p>
+            </div>
+            <div>
+                <h3 class="center">Jules</h3>
+                <p>Select'eat a redéfini mon expérience culinaire à Bordeaux. La réservation en ligne est facile, et la personnalisation des ingrédients est un vrai plus. Les plats
+                sont innovants avec des produits locaux. L'ambiance est parfaite pour un moment de détente. Je recommande pour une expérience culinaire unique à Bordeaux</p>
+            </div>
+            <div>
+                <h3 class="center">Sophie</h3>
+                <p>Un dîner en amoureux parfait au restaurant bistronomique Select'eat à Bordeaux ! La personnalisation des plats avec des ingrédients de qualité a rendu notre 
+                repas unique. L'ambiance est romantique et chaleureuse. Le service est attentionné. Pour une soirée spéciale avec des plats personnalisés, c'est l'endroit idéal !</p>
+            </div>
+        </div>
+    </footer>
 {% endblock %}

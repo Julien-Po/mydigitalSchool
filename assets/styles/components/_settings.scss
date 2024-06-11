@@ -1,6 +1,10 @@
 $titlecolor : #A28C3B;
 $text : #EFE7DA;
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100..900;1,100..900&display=swap');
+
+
 * {
     // background-color: #041E2A;
 }
@@ -13,12 +17,26 @@ body {
     min-height: 100vh;
 }
 
+p h2 h3 label{
+    color :  $text;
+    font-family : Montserrat, sans-serif;
+}
+
+// .inputColor {
+//     background-color: white;
+// }
+
+// .textColor {
+//     color :  $text;
+// }
+
 li {
     list-style-type: none;
 }
 
-.titlecolor {
+.title {
     color: $titlecolor;
+    font-family: Aleo, sans-serif;
 }
 
 
@@ -26,5 +44,9 @@ li {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.calendar {
+    padding: 200px 0;
 }
 

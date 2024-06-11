@@ -1,11 +1,31 @@
-{# {% extends 'commons/navbar.html.twig' %} #}
+{% extends 'base.html.twig' %}
 
 {% block title %} 
 
 {% endblock %}
+{% block main %}
 
-{% block body %}
+<div class="new">
+{{ form_start(form) }}
 
-{{ form(form) }}
+<div class="spacing top">
+{{form_label(form.email)}}
 
+</div>
+<div class="inputSpacing">
+{{form_widget(form.email)}}
+</div>
+
+<div class="spacing">
+{{form_label(form.fullname)}}
+
+</div>
+<div class="inputSpacing">
+{{form_widget(form.fullname)}}
+</div>
+
+
+
+{{form_end(form)}}
+</div>
 {% endblock %}
