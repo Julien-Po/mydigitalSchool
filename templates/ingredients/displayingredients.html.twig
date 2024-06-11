@@ -6,7 +6,6 @@
         <div class="card">
             <h2>{{ ingredient.name }}</h2>
             <h2>{{ ingredient.allergene }}</h2>
-            <h2>{{ ingredient.price }}{{'EUR'|currency_symbol}}</h2>
             <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}">
             <a href="{{ path('edit_ingredients', { 'id': ingredient.id }) }}">Modifier</a>
             <a href="{{ path('delete_ingredients', { 'id': ingredient.id }) }}">Supprimer</a>

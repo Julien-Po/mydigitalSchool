@@ -21,9 +21,6 @@ class IngredientsType extends AbstractType
             ->add('name', TextType::class, [
                 "label" => "Nom"
             ])
-            ->add('price',NumberType::class, [
-                "label" => "Prix"
-            ])
             ->add('image', FileType::class, [
                 "mapped" => false, 
                 "required" => false

@@ -59,7 +59,7 @@ class RecipesController extends AbstractController
 
 
     #[Route('/recipes', name :'view_recipes')]
-    public function displayGenre(RecipesRepository $repository) : Response
+    public function displayRecipes(RecipesRepository $repository) : Response
 
     {
         $recipes = $repository->findAll();

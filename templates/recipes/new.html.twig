@@ -4,17 +4,50 @@
 
 {% block main %}
 <h1>Choisissez vos ingrédients</h1>
-<form action="{{ path('app_recipes') }}" method="post">
-<div class="cards-container">
-    {% for ingredient in ingredients %}
-        <div class = 'card'>
-            <label for="">{{ ingredient.name }}</label>
-            <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}">
-            <h2>{{ ingredient.price }}{{'EUR'|currency_symbol}}</h2>
-            <input type="checkbox" name="ingredients[]" value="{{ ingredient.id }}">
-        </div>
-    {% endfor %}
-</div>
+<form id="ingredients-form" action="{{ path('app_recipes') }}" method="post">
+    <div class="cards-container">
+        {% for ingredient in ingredients %}
+            <div class="card">
+                <label for="">{{ ingredient.name }}</label>
+                <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}">
+                <input type="checkbox" name="ingredients[]" value="{{ ingredient.id }}" class="ingredient-checkbox">
+            </div>
+        {% endfor %}
+    </div>
     <input type="submit">
 </form>
+
+<div id="selected-ingredients-container">
+    <h2>Panier</h2>
+    <ul id="selected-ingredients-list"></ul>
+</div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('ingredients-form');
+    const checkboxes = form.querySelectorAll('.ingredient-checkbox');
+    const selectedIngredientsContainer = document.getElementById('selected-ingredients-container');
+    const selectedIngredientsList = document.getElementById('selected-ingredients-list');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            updateSelectedIngredients();
+        });
+    });
+
+    function updateSelectedIngredients() {
+        selectedIngredientsList.innerHTML = '';
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                const label = checkbox.previousElementSibling.previousElementSibling.textContent;
+                const listItem = document.createElement('li');
+                listItem.textContent = label;
+                selectedIngredientsList.appendChild(listItem);
+            }
+        });
+    }
+});
+</script>
 {% endblock %}

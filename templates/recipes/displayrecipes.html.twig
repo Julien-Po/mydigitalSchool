@@ -6,7 +6,6 @@
             {% for ingredient in recipe.ingredients %}
                 <div class="card">
                     <h3>{{ ingredient.name }}</h3>
-                    <h2>{{ ingredient.price }}{{'EUR'|currency_symbol}}</h2>
                     <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}">
                 </div>
             {% endfor %}
