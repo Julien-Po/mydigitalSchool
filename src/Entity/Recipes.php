@@ -21,6 +21,19 @@ class Recipes
     #[ORM\ManyToMany(targetEntity: Ingredients::class, inversedBy: 'recipes')]
     private Collection $ingredients;
 
+    #[ORM\ManyToOne(inversedBy: 'recipes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $User = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $reservationAt = null;
+
+    #[ORM\Column]
+    private ?bool $isPaid = null;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
@@ -51,6 +64,54 @@ class Recipes
     public function removeIngredient(Ingredients $ingredient): static
     {
         $this->ingredients->removeElement($ingredient);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): static
+    {
+        $this->User = $User;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getReservationAt(): ?\DateTimeImmutable
+    {
+        return $this->reservationAt;
+    }
+
+    public function setReservationAt(\DateTimeImmutable $reservationAt): static
+    {
+        $this->reservationAt = $reservationAt;
+
+        return $this;
+    }
+
+    public function isPaid(): ?bool
+    {
+        return $this->isPaid;
+    }
+
+    public function setPaid(bool $isPaid): static
+    {
+        $this->isPaid = $isPaid;
 
         return $this;
     }

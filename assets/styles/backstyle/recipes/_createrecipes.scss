@@ -6,12 +6,18 @@
 }
 
 .recipesSubmit {
-    display: flex;
-    justify-content: flex-end;
-    align-items: end;
-    margin-right: 20px;
-    margin-bottom: 150px;
+  position: fixed;
+  top: 80vh;
+  left: 90vw;
+  transform: translate(-50%,-50%);
+  button{
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin: 15px;
+  }
 }
+
 
 .alignRecipes {
     display: flex;

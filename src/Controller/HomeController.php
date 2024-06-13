@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\PaymentType;
 use App\Repository\CalendarRepository;
 use App\Repository\IngredientsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,6 +35,25 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             // 'images' => $images,
+        ]);
+    }
+
+    #[Route('/paiement', name:'app_pay')]
+    public function payment(): Response
+    {
+        $form = $this->createForm(PaymentType::class);
+
+        if ($form->isSubmitted()) {
+            // Save the payment data to the database (in a real scenario)
+          
+
+            // Display a success message or redirect
+            $this->addFlash('success', 'Payment successful!');
+
+            return $this->redirectToRoute('payment_success');
+        }
+        return $this->render('pages/payment.html.twig',[
+            'form' => $form->createView(),
         ]);
     }
 }

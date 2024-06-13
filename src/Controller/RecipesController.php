@@ -18,6 +18,7 @@ class RecipesController extends AbstractController
     #[Route('/newrecipes', name: 'app_recipes', methods:['GET','POST'])]
     public function createRecipes(Request $request, EntityManagerInterface $entityManager, IngredientsRepository $ingredientsRepository, GenreRepository $genreRepository): Response
     {
+        
         $recipes = new Recipes(); 
         // Vérifiez si le formulaire a été soumis
         if ($request->isMethod('POST')) {
@@ -32,7 +33,12 @@ class RecipesController extends AbstractController
                     // Logique de traitement des ingrédients, par exemple, les ajouter à la recette
                     $recipes->addIngredient($ingredient);
                 }
-
+                $recipes
+                    ->setUser($this->getUser())
+                    ->setPaid(false)
+                    ->setCreatedAt(new \DateTimeImmutable('now'))
+                    //faire evoluer avec la logique de reservation
+                    ->setReservationAt(new \DateTimeImmutable('now'));
                 // Enregistrez la recette
                 $entityManager->persist($recipes);
                 $entityManager->flush();
@@ -44,7 +50,7 @@ class RecipesController extends AbstractController
                 $this->addFlash('error', 'Aucun ingrédient sélectionné.');
             }
 
-            return $this->redirectToRoute('view_recipes');
+            return $this->redirectToRoute('show_recipes_by_user');
         }
 
         $ingredients = $ingredientsRepository->findAll();
@@ -56,23 +62,15 @@ class RecipesController extends AbstractController
         ]);
     }
 
-
-    #[Route('/recipes', name :'view_recipes')]
-    public function displayRecipes(RecipesRepository $repository) : Response
-
-    {
-        $recipes = $repository->findAll();
-
-        return $this->render('recipes/displayrecipes.html.twig', [
-            'recipes'=>$recipes
-        ]);
-    }
-
     #[Route('/recipes/update/{id}', name : 'edit_recipes')]
     public function editIngredient(RecipesRepository $repository, int $id, Request $request, EntityManagerInterface $manager) : Response
     {
-        $recipes = new Recipes();
         $recipes = $repository->findOneBy(["id" => $id]);
+        
+        // if($this->getUser() != $recipes->getUser){
+        //     return $this->redirectToRoute('app_home');
+        // }
+
         $form = $this->createForm(RecipesType::class, $recipes);
 
         $form->handleRequest($request);
@@ -93,17 +91,32 @@ class RecipesController extends AbstractController
         ]);
     }
 
+    #[Route('/recipes/byUser', name:'show_recipes_by_user', methods:['GET'])]
+    public function showRecipesByUser(RecipesRepository $recipesRepository)
+    {
+
+        $recipesByUser = $recipesRepository->findBy(['User' => $this->getUser()], ['reservationAt' => 'DESC']);
+        
+        return $this->render('recipes/showByUser.html.twig', [
+            'recipes' => $recipesByUser
+        ]);
+    }
+
     #[Route('/recipes/delete/{id}', name : 'delete_recipes', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Recipes $recipes) : Response
     {
-        $manager->remove($recipes);
-        $manager->flush();
+        if($recipes->ispaid() == false){
 
-            $this->addFlash(
-                'success',
-                'Votre ingredient a été supprimé avec succès !'
-            );
-
-        return $this->redirectToRoute('view_recipes');    
+            $manager->remove($recipes);
+            $manager->flush();
+    
+                $this->addFlash(
+                    'success',
+                    'Votre ingredient a été supprimé avec succès !'
+                );
+    
+        }
+        //faire un message pour dire d'appeler le restaurant pour annuler parceque l'acompte a deja ete payé
+        return $this->redirectToRoute('view_recipes'); 
     }
 }

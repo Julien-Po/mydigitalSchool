@@ -1,7 +1,7 @@
-{% include 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block body %}
-<div>
+{% block main %}
+<div class="new">
 {{ form_start(form) }}
 
 {{form_row(form.ingredients)}}
