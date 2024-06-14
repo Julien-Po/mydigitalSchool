@@ -38,6 +38,12 @@ class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/story', name: 'app_story')]
+    public function story(): Response
+    {
+        return $this->render('pages/story.html.twig');
+    }
+
     #[Route('/paiement', name:'app_pay')]
     public function payment(): Response
     {

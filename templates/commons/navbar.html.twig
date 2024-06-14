@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<body>
+{% block main %}
     <nav class="mainHeader">
         <div class="logo">
             <a href="/">
@@ -14,11 +11,17 @@
         </label>
 
         <ul class="navLinks">
+            {% if is_granted('ROLE_USER') %}
+                <li class="navLink">
+                    <a href="/deconnexion">Déconnexion</a>
+                </li>
+            {% else %}
+                <li class="navLink">
+                    <a href="/connexion">Se connecter</a>
+                </li>
+            {% endif %}
             <li class="navLink">
-                <a href="/connexion">Se connecter</a>
-            </li>
-            <li class="navLink">
-                <a href="/calendar/new">Histoire</a>
+                <a href="/story">Histoire</a>
             </li>
             <li class="navLink">
                 <a href="/newrecipes/">Personnalisation</a>
@@ -27,7 +30,5 @@
                 <a href="/contact">Contact</a>
             </li>
         </ul>
-
     </nav>
-</body>
-</html>
+{% endblock %}

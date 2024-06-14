@@ -50,3 +50,24 @@ li {
     padding: 200px 0;
 }
 
+.button {
+    background-color: transparent;
+    border: 1px solid;
+    border-color: $titlecolor;
+    border-radius: 30px;
+    color: $titlecolor;
+    padding: 10px 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px;
+}
+
+@media screen and (max-width: 500px)
+{
+    .button {
+        font-size: 15px;
+        padding: 10px 30px;
+
+    }
+}

@@ -1,19 +1,37 @@
 {% include 'base.html.twig' %}
 
-{% block body %}
+{% block main %}
 
-<div>
+<div class="new">
+
 {{ form_start(form) }}
 
+<div class="spacing">
+{{form_label(form.genre)}}
+
+</div>
+<div class="inputSpacing">
+{{form_widget(form.genre)}}
+</div>
+<div class="spacing">
 {{form_label(form.name)}}
+
+</div>
+<div class="inputSpacing">
 {{form_widget(form.name)}}
-
+</div>
+<div class="spacing">
 {{form_widget(form.image)}}
+</div>
 
+<div class="spacing">
 {{form_label(form.allergene)}}
+</div>
 {{form_widget(form.allergene)}}
 
+<div class="spacing">
 {{form_label(form.submit)}}
+</div>
 {{ form_row(form.submit)}}
 
 {{form_end(form)}}

@@ -55,6 +55,7 @@ class RecipesController extends AbstractController
 
         $ingredients = $ingredientsRepository->findAll();
         $genres = $genreRepository->findAll();
+        // dd($ingredients);
 
         return $this->render('recipes/new.html.twig', [
             'genres' => $genres,

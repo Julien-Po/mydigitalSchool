@@ -28,7 +28,7 @@ class PaymentType extends AbstractType
             ])
             ->add('expiryDate', DateType::class, [
                 'widget' => 'single_text',
-                'label' => 'Expiry Date'
+                'label' => 'Date d\'expiration'
             ])
             ->add('cvv', IntegerType::class, [
                 'label' => 'CVV',
@@ -38,9 +38,14 @@ class PaymentType extends AbstractType
                 'currency' => 'euros',
                 'label' => 'Montant',
                 'data' => '50',
+                
             ])
             ->add('submit', SubmitType::class, 
-            ["label" => "Payer"])
+            ["label" => "Paiement", 
+                "attr" => [
+                    "class" => "button"
+                ]
+            ])
             ;
             
     }

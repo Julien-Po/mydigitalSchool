@@ -2,6 +2,33 @@
     padding-top: 200px;
 }
 
+.spaceLeft {
+    padding-left: 200px;
+}
+
 .paymentFlex {
     display: flex;
+}
+
+.spacedTop {
+    padding-top: 10px;
+}
+
+.spaced {
+    gap: 10px;
+    padding-bottom: 20px;
+    }
+    
+    .inputSpaced {
+        padding-bottom: 10px;
+    }
+
+.spacedBottom {
+    padding-bottom: 100px;
+}
+
+@media screen and (max-width: 565px) {
+    .spaceLeft {
+        padding-left: 20px;
+    }
 }

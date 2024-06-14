@@ -42,7 +42,23 @@
         height: 350px;
         border-radius: 50%;
     }
-} 
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+
+        .borderText, .midText {
+            width: 100%;
+            padding-left: 0;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 0;
+        }
+    }
+}
+
 
 .opinionContainer {
 
