@@ -12,59 +12,64 @@ use App\Repository\GenreRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\RecipesType;
+use App\Repository\CalendarRepository;
 
 class RecipesController extends AbstractController
 {
-    #[Route('/newrecipes', name: 'app_recipes', methods:['GET','POST'])]
-    public function createRecipes(Request $request, EntityManagerInterface $entityManager, IngredientsRepository $ingredientsRepository, GenreRepository $genreRepository): Response
+    #[Route('/newrecipes', name: 'app_recipes', methods: ['GET', 'POST'])]
+    public function createRecipes(Request $request, EntityManagerInterface $entityManager, IngredientsRepository $ingredientsRepository, GenreRepository $genreRepository, CalendarRepository $calendarRepository): Response
     {
-        
-        $recipes = new Recipes(); 
-        // Vérifiez si le formulaire a été soumis
+        $recipes = new Recipes();
+    
         if ($request->isMethod('POST')) {
             $ingredientIds = $request->request->all('ingredients');
-            
-            // Vérifiez si des ingrédients ont été sélectionnés
-            if (!empty($ingredientIds)) {
-                // Récupérez les objets ingrédients correspondants depuis la base de données
+            $calendarId = $request->request->get('calendar_id');
+            $user = $this->getUser();
+    
+            if (!empty($ingredientIds) && $calendarId && $user) {
                 $selectedIngredients = $ingredientsRepository->findBy(['id' => $ingredientIds]);
-                // Traitez les ingrédients sélectionnés ici
                 foreach ($selectedIngredients as $ingredient) {
-                    // Logique de traitement des ingrédients, par exemple, les ajouter à la recette
                     $recipes->addIngredient($ingredient);
                 }
-                $recipes
-                    ->setDessert(false)
-                    ->setPlate(true)
-                    ->setStarter(false)
-                    ->setUser($this->getUser())
-                    ->setPaid(false)
-                    ->setCreatedAt(new \DateTimeImmutable('now'))
-                    //faire evoluer avec la logique de reservation
-                    ->setReservationAt(new \DateTimeImmutable('now'));
-                // Enregistrez la recette
-                $entityManager->persist($recipes);
-                $entityManager->flush();
-
-                // Ajoutez un message flash ou une autre indication de succès
-                $this->addFlash('success', 'Recette créée avec succès!');
+    
+                $calendar = $calendarRepository->find($calendarId);
+    
+                if ($calendar && $calendar->getUser() === $user) {
+                    $recipes
+                        ->setDessert($request->request->get('dessert') !== null)
+                        ->setPlate($request->request->get('plate') !== null)
+                        ->setStarter($request->request->get('starter') !== null)
+                        ->setUser($user)
+                        ->setPaid(false)
+                        ->setCreatedAt(new \DateTimeImmutable('now'))
+                        ->setCalendar($calendar)
+                        ->setReservationAt($calendar->getDate());
+    
+                    $entityManager->persist($recipes);
+                    $entityManager->flush();
+    
+                    $this->addFlash('success', 'Recette créée avec succès!');
+                } else {
+                    $this->addFlash('error', 'Calendrier invalide ou ne vous appartient pas.');
+                }
             } else {
-                // Ajoutez un message flash ou une autre indication d'erreur
-                $this->addFlash('error', 'Aucun ingrédient sélectionné.');
+                $this->addFlash('error', 'Aucun ingrédient sélectionné ou calendrier invalide.');
             }
-
+    
             return $this->redirectToRoute('show_recipes_by_user');
         }
-
+    
         $ingredients = $ingredientsRepository->findAll();
         $genres = $genreRepository->findAll();
-        // dd($ingredients);
-
+        $calendars = $calendarRepository->findBy(['user' => $this->getUser()]);
+    
         return $this->render('recipes/new.html.twig', [
             'genres' => $genres,
-            'ingredients' => $ingredients
+            'ingredients' => $ingredients,
+            'calendars' => $calendars,
         ]);
     }
+    
 
     #[Route('/recipes/update/{id}', name : 'edit_recipes')]
     public function editIngredient(RecipesRepository $repository, int $id, Request $request, EntityManagerInterface $manager) : Response

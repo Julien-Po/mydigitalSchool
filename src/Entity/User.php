@@ -45,9 +45,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Recipes::class, mappedBy: 'User', orphanRemoval: true)]
     private Collection $recipes;
 
+    /**
+     * @var Collection<int, Calendar>
+     */
+    #[ORM\OneToMany(targetEntity: Calendar::class, mappedBy: 'user')]
+    private Collection $Calendar;
+
+    /**
+     * @var Collection<int, Recipes>
+     */
+    #[ORM\OneToMany(targetEntity: Recipes::class, mappedBy: 'user')]
+    private Collection $Recipes;
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
+        $this->Calendar = new ArrayCollection();
+        $this->Recipes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -173,6 +187,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($recipe->getUser() === $this) {
                 $recipe->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Calendar>
+     */
+    public function getCalendar(): Collection
+    {
+        return $this->Calendar;
+    }
+
+    public function addCalendar(Calendar $calendar): static
+    {
+        if (!$this->Calendar->contains($calendar)) {
+            $this->Calendar->add($calendar);
+            $calendar->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalendar(Calendar $calendar): static
+    {
+        if ($this->Calendar->removeElement($calendar)) {
+            // set the owning side to null (unless already changed)
+            if ($calendar->getUser() === $this) {
+                $calendar->setUser(null);
             }
         }
 

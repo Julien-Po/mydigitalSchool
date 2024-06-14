@@ -43,6 +43,12 @@ class Recipes
     #[ORM\Column(nullable: true)]
     private ?bool $isDessert = null;
 
+    #[ORM\ManyToOne(inversedBy: 'Recipes')]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'recipes')]
+    private ?Calendar $calendar = null;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
@@ -157,6 +163,18 @@ class Recipes
     public function setDessert(?bool $isDessert): static
     {
         $this->isDessert = $isDessert;
+
+        return $this;
+    }
+
+    public function getCalendar(): ?Calendar
+    {
+        return $this->calendar;
+    }
+
+    public function setCalendar(?Calendar $calendar): static
+    {
+        $this->calendar = $calendar;
 
         return $this;
     }

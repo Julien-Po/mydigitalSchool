@@ -38,6 +38,17 @@ class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/mentions', name: 'mentions')]
+    public function mentions(): Response
+    {
+      
+
+
+        return $this->render('pages/mentions.html.twig', [
+            // 'images' => $images,
+        ]);
+    }
+
     #[Route('/story', name: 'app_story')]
     public function story(): Response
     {
@@ -62,4 +73,6 @@ class HomeController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    
 }
