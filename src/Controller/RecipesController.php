@@ -34,6 +34,9 @@ class RecipesController extends AbstractController
                     $recipes->addIngredient($ingredient);
                 }
                 $recipes
+                    ->setDessert(false)
+                    ->setPlate(true)
+                    ->setStarter(false)
                     ->setUser($this->getUser())
                     ->setPaid(false)
                     ->setCreatedAt(new \DateTimeImmutable('now'))

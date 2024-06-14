@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Calendar;
+use App\Validator\NoMonday;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,6 +15,8 @@ class CalendarType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $twoWeeksLater = new \DateTimeImmutable('+14 days');
+
         $builder
             ->add('title', TextType::class, [
                 'label' => 'Nom de la réservation'
@@ -24,9 +27,10 @@ class CalendarType extends AbstractType
                 'hours' => range(12, 22), // Limite de 9h à 17h,
                 'constraints' => [
                     new GreaterThanOrEqual([
-                        'value' => 'today',
-                        'message' => 'La date de début ne peut pas être antérieure à aujourd\'hui.'
-                    ])
+                        'value' => $twoWeeksLater,
+                        'message' => 'La date de début doit être au moins deux semaines à partir d\'aujourd\'hui.'
+                    ]),
+                    new NoMonday()
                 ]
             ])
             ->add('description', TextType::class, [

@@ -34,6 +34,15 @@ class Recipes
     #[ORM\Column]
     private ?bool $isPaid = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isStarter = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isPlate = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isDessert = null;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
@@ -112,6 +121,42 @@ class Recipes
     public function setPaid(bool $isPaid): static
     {
         $this->isPaid = $isPaid;
+
+        return $this;
+    }
+
+    public function isStarter(): ?bool
+    {
+        return $this->isStarter;
+    }
+
+    public function setStarter(?bool $isStarter): static
+    {
+        $this->isStarter = $isStarter;
+
+        return $this;
+    }
+
+    public function isPlate(): ?bool
+    {
+        return $this->isPlate;
+    }
+
+    public function setPlate(?bool $isPlate): static
+    {
+        $this->isPlate = $isPlate;
+
+        return $this;
+    }
+
+    public function isDessert(): ?bool
+    {
+        return $this->isDessert;
+    }
+
+    public function setDessert(?bool $isDessert): static
+    {
+        $this->isDessert = $isDessert;
 
         return $this;
     }
