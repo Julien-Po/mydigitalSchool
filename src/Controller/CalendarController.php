@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Calendar;
 use App\Form\CalendarType;
 use App\Repository\CalendarRepository;
+use App\Repository\RecipesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,24 +46,38 @@ class CalendarController extends AbstractController
     
 
     #[Route('/calendar/new', name: 'app_calendar_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, RecipesRepository $recipesRepository): Response
     {
         $calendar = new Calendar();
+        $recipeId = $request->query->get('recipe_id'); // Utilisez 'recipe_id'
+        $recipe = $recipesRepository->find($recipeId);
+        
+        if (!$recipe) {
+            $this->addFlash('error', 'Recette non trouvée.');
+            return $this->redirectToRoute('app_recipes');
+        }
+    
         $form = $this->createForm(CalendarType::class, $calendar);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
+            $calendar->addRecipe($recipe); // Liez le calendrier à la recette
             $entityManager->persist($calendar);
             $entityManager->flush();
-
-            return $this->redirectToRoute('app_calendar_index', [], Response::HTTP_SEE_OTHER);
+    
+            return $this->redirectToRoute('show_recipes_by_user', [], Response::HTTP_SEE_OTHER);
         }
-
+    
         return $this->render('calendar/new.html.twig', [
             'calendar' => $calendar,
             'form' => $form,
         ]);
     }
+    
+    
+    
+
+
 
     #[Route('/calendar/{id}', name: 'app_calendar_show', methods: ['GET'])]
     public function show(Calendar $calendar): Response

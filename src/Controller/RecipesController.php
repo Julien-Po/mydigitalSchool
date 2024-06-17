@@ -49,6 +49,7 @@ class RecipesController extends AbstractController
                     $entityManager->flush();
     
                     $this->addFlash('success', 'Recette créée avec succès!');
+                    return $this->redirectToRoute('app_calendar_new', ['recipe_id' => $recipes->getId()]);
                 } else {
                     $this->addFlash('error', 'Calendrier invalide ou ne vous appartient pas.');
                 }
@@ -56,7 +57,7 @@ class RecipesController extends AbstractController
                 $this->addFlash('error', 'Aucun ingrédient sélectionné ou calendrier invalide.');
             }
     
-            return $this->redirectToRoute('show_recipes_by_user');
+            return $this->redirectToRoute('app_calendar_new');
         }
     
         $ingredients = $ingredientsRepository->findAll();
@@ -69,6 +70,8 @@ class RecipesController extends AbstractController
             'calendars' => $calendars,
         ]);
     }
+    
+    
     
 
     #[Route('/recipes/update/{id}', name : 'edit_recipes')]
