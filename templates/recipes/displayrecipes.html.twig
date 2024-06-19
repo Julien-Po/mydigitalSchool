@@ -1,6 +1,6 @@
-{% include 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block body %}
+{% block main %}
     <div class="cards-container offTop">
         {% for recipe in recipes %}
             {% for ingredient in recipe.ingredients %}

@@ -5,15 +5,12 @@ $text : #EFE7DA;
 @import url('https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100..900;1,100..900&display=swap');
 
 
-* {
-    // background-color: #041E2A;
-}
-
 body {
     margin: 0;
     padding: 0;
     height: 100%;
     position: relative;
+    // background-color: #041E2A;
     min-height: 100vh;
 }
 
@@ -39,6 +36,17 @@ li {
     font-family: Aleo, sans-serif;
 }
 
+a {
+    text-decoration: none;
+}
+
+a {
+    color: $titlecolor;
+}
+
+.bottom {
+    padding-bottom: 200px;
+}
 
 .center {
     display: flex;

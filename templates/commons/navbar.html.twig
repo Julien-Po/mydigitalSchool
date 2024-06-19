@@ -1,34 +1,47 @@
-{% block main %}
-    <nav class="mainHeader">
-        <div class="logo">
-            <a href="/">
-                <img class="imgLogo" src="{{ asset('img/Logo.png') }}" alt="logoLr">
-            </a>
-        </div>
-        <input type="checkbox" class="menuBtn" id="menuBtn">
-        <label for="menuBtn" class="menuIcon">
-            <span class="menuIconLine"></span>
-        </label>
+<nav class="mainHeader">
+    <input type="checkbox" class="menuBtn" id="menuBtn">
+    <label for="menuBtn" class="menuIcon">
+        <span class="menuIconLine"></span>
+    </label>
 
-        <ul class="navLinks">
-            {% if is_granted('ROLE_USER') %}
-                <li class="navLink">
-                    <a href="/deconnexion">Déconnexion</a>
-                </li>
-            {% else %}
-                <li class="navLink">
-                    <a href="/connexion">Se connecter</a>
-                </li>
-            {% endif %}
-            <li class="navLink">
-                <a href="/story">Histoire</a>
+    <ul class="navLinks navLinksTop">
+        {% if is_granted('ROLE_USER') %}
+            <li class="navLink title">
+                <a href={{ path('app_deconnexion')}}>Déconnexion</a>
             </li>
-            <li class="navLink">
-                <a href="/newrecipes/">Personnalisation</a>
+        {% else %}
+            <li class="navLink firstHalf title">
+                <a href={{ path('app_connexion')}}>Connexion</a>
             </li>
-            <li class="navLink">
-                <a href="/contact">Contact</a>
+        {% endif %}
+        <li class="navLink title">
+           <a href={{ path('app_story')}}>Histoire</a>
+
+        </li>
+        {% if is_granted('ROLE_ADMIN') %}
+            <li class="navLink title">
+                <a href={{ path('app_admin')}}>Administration</a>
             </li>
-        </ul>
-    </nav>
-{% endblock %}
+        {% endif %}
+    </ul>
+
+
+    <div class="logo">
+        <a href={{ path('app_home')}}>
+            <img class="imgLogo" src="{{ asset('img/Logo.png') }}" alt="logoLr">
+        </a>
+    </div>
+    
+    <ul class="navLinks navLinksBottom">
+        <li class="navLink title">
+            <a href={{ path('recipes_type')}}>Personnalisation</a>
+
+        </li>
+        <li class="navLink title">
+            <a href={{ path('app_contact')}}>Contact</a>
+
+        </li>
+    </ul>
+</nav>
+
+

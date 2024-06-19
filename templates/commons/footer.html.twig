@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
+
+{% block main %}
+
  {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
     {% endblock %}
-</head>
 
-<body>
     <footer class="footer">
         <div class ="footerElements">
             <a href="/">
                 <img class="imgLogo" src="{{ asset('img/Logo.png') }}" alt="logoselecteat">
             </a>
-             <a href="/mentions" class="mentions">Mentions légales</a>
+             <a href="/mentions" class="mentions title">Mentions légales</a>
             <div>
                 <img class="imgTwitter mediaImg" src="{{ asset('img/facebooklogo.svg') }}" alt="logofacebook">
                 <img class="imginstagram mediaImg" src="{{ asset('img/instalogo.png') }}" alt="logoInsta">
@@ -20,5 +18,4 @@
             </div>
         </div>
     </footer>
- </body>
-</html>
+ {% endblock %}

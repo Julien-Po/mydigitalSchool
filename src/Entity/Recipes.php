@@ -28,7 +28,7 @@ class Recipes
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $reservationAt = null;
 
     #[ORM\Column]
@@ -42,9 +42,6 @@ class Recipes
 
     #[ORM\Column(nullable: true)]
     private ?bool $isDessert = null;
-
-    #[ORM\ManyToOne(inversedBy: 'Recipes')]
-    private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
     private ?Calendar $calendar = null;

@@ -14,7 +14,7 @@ use App\Repository\IngredientsRepository;
 
 class IngredientsController extends AbstractController
 {
-    #[Route('/newingredient', name: 'app_ingredients', methods:['GET','POST'])]
+    #[Route('admin/newingredient', name: 'app_ingredients', methods:['GET','POST'])]
     public function createIngredient(Request $request, EntityManagerInterface $manager): Response
     {
             $ingredients = new Ingredients ();
@@ -45,7 +45,7 @@ class IngredientsController extends AbstractController
             ]);
     }
 
-    #[Route('/ingredients', name : 'display_ingredients', methods:['GET'])]
+    #[Route('admin/ingredients', name : 'display_ingredients', methods:['GET'])]
     public function displayIngredient( IngredientsRepository $repository) : Response 
     {
         $ingredients = $repository->findAll();
@@ -55,7 +55,7 @@ class IngredientsController extends AbstractController
         ]);
     }
 
-    #[Route('/ingredients/update/{id}', name : 'edit_ingredients')]
+    #[Route('admin/ingredients/update/{id}', name : 'edit_ingredients')]
     public function editIngredient(IngredientsRepository $repository, int $id, Request $request, EntityManagerInterface $manager) : Response
     {
         $ingredients = new Ingredients();
@@ -79,7 +79,7 @@ class IngredientsController extends AbstractController
         ]);
     }
 
-    #[Route('/ingredients/delete/{id}', name : 'delete_ingredients', methods: ['GET'])]
+    #[Route('admin/ingredients/delete/{id}', name : 'delete_ingredients', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Ingredients $ingredients) : Response
     {
         $manager->remove($ingredients);

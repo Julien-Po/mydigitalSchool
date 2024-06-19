@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Choisissez vos ingrédients{% endblock %}
+
+{% block main %}
+<h1 class="new spacingTop title">Choisissez le type de plat</h1>
+
+<nav class="mealNav">
+    <ul>
+        <li class="button"><a href={{ path ('app_recipes', {type: 'starter'}) }}>Entrée</a></li>
+        <li class="button"><a href={{ path ('app_recipes', {type: 'plate'}) }}>Plat</a></li>
+        <li class="button"><a href={{ path ('app_recipes', {type: 'dessert'}) }}>Dessert</a></li>
+    </ul>
+</nav>
+
+    <h2 class="title">Mes Recettes</h1>
+
+<h3 class="title">Entrées</h2>
+<div class="mealContainer">
+    {% if recipes is not empty %}
+        {% for recipe in recipes %}
+            {% if recipe.isStarter %}
+                <h3> Starter : </h3>                    
+                {% for ingredient in recipe.ingredients %}
+                    <div class="mealContent">
+                        <h4 class="mealElement">{{ recipe.createdAt|date('d/m/Y') }}</h3>
+                        <h4 class="mealElement">{{ ingredient.name }}</h3>
+                        <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}" class="mealImage">
+                    </div>
+                {% endfor %}
+                <a href={{path('delete_recipes', {'id': recipe.id})}}>Supprimer le plat<a>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p>Vous n'avez pas encore commandé d'entrée</p>
+    {% endif %}
+</div>
+
+<h3 class="title">Plats</h3>
+<div class="mealContainer">
+    {% if recipes is not empty %}
+        {% for recipe in recipes %}
+            {% if recipe.isPlate %}
+                <h3> Plate : </h3>
+                {% for ingredient in recipe.ingredients %}
+                    <div class="mealContent">
+                        <h4 class="mealElement">{{ recipe.createdAt|date('d/m/Y') }}</h3>
+                        <h4 class="mealElement">{{ ingredient.name }}</h3>
+                        <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}" class="mealImage">
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p>No plates found.</p>
+    {% endif %}
+</div>
+
+<h3 class="title">Desserts</h3>
+<div class="mealContainer">
+    {% if recipes is not empty %}
+        {% for recipe in recipes %}
+            {% if recipe.isDessert %}
+            <h3> Dessert : </h3>
+                {% for ingredient in recipe.ingredients %}
+                    <div class="mealContent">
+                        <h3 class="mealElement">{{ recipe.createdAt|date('d/m/Y') }}</h3>
+                        <h3 class="mealElement">{{ ingredient.name }}</h3>
+                        <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}" class="mealImage">
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p>No desserts found.</p>
+    {% endif %}
+</div>
+
+<div class="bottom center top"> 
+    <a  class='button' href={{ path('app_calendar_new')}}> Reserver <a>
+</div>
+{% endblock %}
+

@@ -1,12 +1,9 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Nouveau Calendrier{% endblock %}
 
 {% block main %}
-<h1>Créer un nouveau calendrier</h1>
+<h1 class="title top">Créer un nouveau calendrier</h1>
 
 {{ form_start(form) }}
-    <div class="spacing top">
+    <div class="spacing ">
         {{ form_label(form.title) }}
     </div>
     <div class="inputSpacing">

@@ -14,10 +14,10 @@
         {% endfor %}
     </select>
 </div>
-
+{{ type }}
 <div class="alignRecipes">
     <div class="ingredients-container">
-        <form id="ingredients-form" action="{{ path('app_recipes') }}" method="post">
+        <form id="ingredients-form" action="{{ path('app_recipes', {'type': type }) }}" method="post">
             <div class="cards-container" id="ingredients-container">
                 {% for ingredient in ingredients %}
                     <div class="card" data-genre="{{ ingredient.genre.id }}">

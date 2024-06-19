@@ -16,6 +16,25 @@ class CalendarRepository extends ServiceEntityRepository
         parent::__construct($registry, Calendar::class);
     }
 
+
+    /**
+     * @param \DateTimeInterface $date
+     * @return Calendar[] Returns an array of Calendar objects
+     */
+    public function findCalendarsByStartDate(\DateTimeInterface $date): array
+    {
+        $startOfDay = new \DateTime($date->format('Y-m-d 00:00:00'));
+        $endOfDay = new \DateTime($date->format('Y-m-d 23:59:59'));
+
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.start >= :startOfDay')
+            ->andWhere('c.start <= :endOfDay')
+            ->setParameter('startOfDay', $startOfDay)
+            ->setParameter('endOfDay', $endOfDay)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Calendar[] Returns an array of Calendar objects
 //     */

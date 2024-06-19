@@ -3,47 +3,25 @@
 namespace App\Controller;
 
 use App\Form\PaymentType;
-use App\Repository\CalendarRepository;
 use App\Repository\IngredientsRepository;
+use App\Repository\RecipesRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(IngredientsRepository $ingredientsRepository): Response
+    public function index(): Response
     {
-        // $projectDir = $this->getParameter('kernel.project_dir');
-        // $imagesDir = $projectDir . '/assets/img/entrees/'; 
-
-        // if (!is_dir($imagesDir)) {
-        //     throw new \Exception("Le chemin spécifié est introuvable: $imagesDir");
-        // }
-
-        // $images = array_diff(scandir($imagesDir), ['..', '.']);
-        // $images = array_filter($images, function($file) use ($imagesDir) {
-        //     return is_file($imagesDir . $file);
-        // });
-
-        // $images = array_map(function($image) {
-        //     return 'img/entrees/' . $image;
-        // }, $images);
-        // $starterIngredient = $ingredientsRepository->findRandomIngredient();
-        // dd($starterIngredient);
-
-
-        return $this->render('home/index.html.twig', [
-            // 'images' => $images,
-        ]);
+        return $this->render('home/index.html.twig');
     }
 
     #[Route('/mentions', name: 'mentions')]
     public function mentions(): Response
     {
-      
-
-
         return $this->render('pages/mentions.html.twig', [
             // 'images' => $images,
         ]);
@@ -56,19 +34,27 @@ class HomeController extends AbstractController
     }
 
     #[Route('/paiement', name:'app_pay')]
-    public function payment(): Response
+    public function payment(RecipesRepository $recipesRepository, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(PaymentType::class);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            // Save the payment data to the database (in a real scenario)
-          
+            // get les recipes du user log
+            $recipesByUser = $recipesRepository->findByUser($this->getUser());
+            foreach ($recipesByUser as $recipe) {
+                $recipe->setPaid(true);
 
+                $em->persist($recipe);
+            }
+            
+            $em->flush();
             // Display a success message or redirect
             $this->addFlash('success', 'Payment successful!');
 
             return $this->redirectToRoute('payment_success');
         }
+        dd('coucou');
         return $this->render('pages/payment.html.twig',[
             'form' => $form->createView(),
         ]);

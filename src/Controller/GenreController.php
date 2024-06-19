@@ -13,7 +13,7 @@ use App\Repository\GenreRepository;
 
 class GenreController extends AbstractController
 {
-    #[Route('/newgenre', name: 'app_genre', methods:['GET','POST'])]
+    #[Route('admin/newgenre', name: 'app_genre', methods:['GET','POST'])]
     public function createGenre(Request $request, EntityManagerInterface $manager): Response
     {
 
@@ -36,7 +36,7 @@ class GenreController extends AbstractController
             ]);
     }
 
-    #[Route('/genre', name :'view_genre')]
+    #[Route('admin/genre', name :'view_genre')]
     public function displayGenre(GenreRepository $repository) : Response
 
     {
@@ -47,7 +47,7 @@ class GenreController extends AbstractController
         ]);
     }
 
-    #[Route('/genre/update/{id}', name: 'edit_genre', methods: ['GET', 'POST'])]
+    #[Route('admin/genre/update/{id}', name: 'edit_genre', methods: ['GET', 'POST'])]
     public function editGenre(GenreRepository $repository, int $id, Request $request, EntityManagerInterface $manager): Response
     {
         $genre = $repository->findOneBy(["id" => $id]);
@@ -72,7 +72,7 @@ class GenreController extends AbstractController
     }
     
 
-    #[Route('/genre/delete/{id}', name : 'delete_genre', methods: ['GET'])]
+    #[Route('admin/genre/delete/{id}', name : 'delete_genre', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Genre $genre) : Response
     {
         $manager->remove($genre);
