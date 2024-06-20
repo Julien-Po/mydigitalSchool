@@ -51,12 +51,13 @@ class CalendarController extends AbstractController
         $calendar = new Calendar();
         // $recipeId = $request->query->get('recipe_id'); // Utilisez 'recipe_id'
         $user = $this->getUser();
-        
+
         $form = $this->createForm(CalendarType::class, $calendar);
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
-            $calendar->setUser($user);
+            $calendar
+                ->setUser($user);
             $entityManager->persist($calendar);
             $entityManager->flush();
     

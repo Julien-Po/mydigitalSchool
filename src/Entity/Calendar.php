@@ -34,6 +34,7 @@ class Calendar
     #[ORM\OneToMany(targetEntity: Recipes::class, mappedBy: 'calendar')]
     private Collection $recipes;
 
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
@@ -121,4 +122,5 @@ class Calendar
 
         return $this;
     }
+
 }

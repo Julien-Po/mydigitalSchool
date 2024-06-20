@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block main %}
+<div class="cards-container top left">
+    {% for recipeByUser in recipesByUser %}
+        <div class="card">
+            {% if recipeByUser.isStarter %}
+                <h2 class="center title">Entrée :</h2>
+            {% elseif recipeByUser.isPlate %}
+                <h2 class="center title">Plat :</h2>
+            {% elseif recipeByUser.isDessert %}
+                <h2 class="center title">Dessert :</h2>
+            {% endif %}
+            <ul>
+                <h2 class="center textStyle">Client : {{ recipeByUser.user.email }}</h2>
+
+                {% for ingredient in recipeByUser.ingredients %}
+                    <li>
+                        <h2 class="center textStyle">{{ ingredient.name }}</h2>
+                        <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}" class="mealImage">
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="center">
+                <a href="{{ path('app_recipe_isServed', {'recipeId' : recipeByUser.id}) }}" class="button">Envoyer en salle !</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

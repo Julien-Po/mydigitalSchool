@@ -37,7 +37,8 @@ class RecipesController extends AbstractController
                     ->setStarter($request->request->get('starter') !== null)
                     ->setUser($user)
                     ->setPaid(false)
-                    ->setCreatedAt(new \DateTimeImmutable('now'));
+                    ->setCreatedAt(new \DateTimeImmutable('now'))
+                    ->setServed(false);
                     switch ($type) {
                         case 'starter':
                             $recipes->setStarter(true);
@@ -74,37 +75,6 @@ class RecipesController extends AbstractController
         ]);
     }
     
-    
-    
-
-    #[Route('admin/recipes/update/{id}', name : 'edit_recipes')]
-    public function editIngredient(RecipesRepository $repository, int $id, Request $request, EntityManagerInterface $manager) : Response
-    {
-        $recipes = $repository->findOneBy(["id" => $id]);
-        
-        // if($this->getUser() != $recipes->getUser){
-        //     return $this->redirectToRoute('app_home');
-        // }
-
-        $form = $this->createForm(RecipesType::class, $recipes);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid())
-        {
-           $recipes = $form->getData();
-
-           $manager->persist($recipes);
-           $manager->flush();
-
-           return $this->redirectToRoute('view_recipes');
-        }
-
-      
-        $form = $this->createForm(RecipesType::class, $recipes);
-        return $this->render('recipes/edit.html.twig',[
-            'form' => $form->createView()
-        ]);
-    }
 
     #[Route('/recipes/delete/{id}', name : 'delete_recipes', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Recipes $recipes) : Response

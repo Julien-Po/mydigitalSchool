@@ -39,7 +39,7 @@ class HomeController extends AbstractController
         $form = $this->createForm(PaymentType::class);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             // get les recipes du user log
             $recipesByUser = $recipesRepository->findByUser($this->getUser());
             foreach ($recipesByUser as $recipe) {
@@ -54,7 +54,6 @@ class HomeController extends AbstractController
 
             return $this->redirectToRoute('payment_success');
         }
-        dd('coucou');
         return $this->render('pages/payment.html.twig',[
             'form' => $form->createView(),
         ]);

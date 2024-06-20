@@ -4,12 +4,31 @@
 
 {% block main %}
 
-<div class="example-wrapper">
-    <h1>Hel= ✅</h1>
-
-    {{ form(form) }}
-
-    {{ dump(recipesOfTheDay) }}
-    
+<div class=" top left">
+<div class="cards-container">
+    {% for recipe in recipesOfTheDay %}
+    <div class="card">
+        <h2 class="title">{{ recipe.title }}</h2>
+        <p class="textStyle">Description :{{ recipe.description }}</p>
+        <p class="textStyle">Date de début: {{ recipe.start|date('Y-m-d') }}</p>
+        <p class="textStyle">Recette par: {{ recipe.user.fullName }}</p>
+         <a class="button" href={{ path('app_recipes_user', {'clientId' : recipe.user.id})}}>Ingredients</a>
+    </div>
+    {% endfor %}
 </div>
+</div>
+    {{ form_start(form) }}
+<div class="new">
+      <div class="spacing">
+        {{ form_label(form.date) }}
+    </div>
+    <div class="inputSpacing">
+        {{ form_widget(form.date) }}
+    </div>
+    
+    <div class="inputSpacing">
+        {{ form_widget(form.submit) }}
+    </div>
+</div>
+    {{ form_end(form) }}
 {% endblock %}

@@ -7,28 +7,27 @@
 
 <nav class="mealNav">
     <ul>
-        <li class="button"><a href={{ path ('app_recipes', {type: 'starter'}) }}>Entrée</a></li>
-        <li class="button"><a href={{ path ('app_recipes', {type: 'plate'}) }}>Plat</a></li>
-        <li class="button"><a href={{ path ('app_recipes', {type: 'dessert'}) }}>Dessert</a></li>
+        <li class="button"><a href="{{ path('app_recipes', {type: 'starter'}) }}">Entrée</a></li>
+        <li class="button"><a href="{{ path('app_recipes', {type: 'plate'}) }}">Plat</a></li>
+        <li class="button"><a href="{{ path('app_recipes', {type: 'dessert'}) }}">Dessert</a></li>
     </ul>
 </nav>
 
-    <h2 class="title">Mes Recettes</h1>
+<h2 class="title">Mes Recettes</h2>
 
-<h3 class="title">Entrées</h2>
-<div class="mealContainer">
+<h3 class="title">Entrées</h3>
+<div class="cards-container">
     {% if recipes is not empty %}
         {% for recipe in recipes %}
-            {% if recipe.isStarter %}
-                <h3> Starter : </h3>                    
-                {% for ingredient in recipe.ingredients %}
-                    <div class="mealContent">
-                        <h4 class="mealElement">{{ recipe.createdAt|date('d/m/Y') }}</h3>
-                        <h4 class="mealElement">{{ ingredient.name }}</h3>
+            {% if recipe.isStarter and not recipe.IsPaid %}
+                <div class="card">
+                    <h4 class="mealElement">{{ recipe.createdAt|date('d/m/Y') }}</h4>
+                    {% for ingredient in recipe.ingredients %}
+                        <h4 class="mealElement">{{ ingredient.name }}</h4>
                         <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}" class="mealImage">
-                    </div>
-                {% endfor %}
-                <a href={{path('delete_recipes', {'id': recipe.id})}}>Supprimer le plat<a>
+                    {% endfor %}
+                    <a href="{{ path('delete_recipes', {'id': recipe.id}) }}" class="mealElement">Supprimer le plat</a>
+                </div>
             {% endif %}
         {% endfor %}
     {% else %}
@@ -37,18 +36,17 @@
 </div>
 
 <h3 class="title">Plats</h3>
-<div class="mealContainer">
+<div class="cards-container">
     {% if recipes is not empty %}
         {% for recipe in recipes %}
-            {% if recipe.isPlate %}
-                <h3> Plate : </h3>
-                {% for ingredient in recipe.ingredients %}
-                    <div class="mealContent">
-                        <h4 class="mealElement">{{ recipe.createdAt|date('d/m/Y') }}</h3>
-                        <h4 class="mealElement">{{ ingredient.name }}</h3>
+            {% if recipe.isPlate and not recipe.IsPaid %}
+                <div class="card">
+                    <h4 class="mealElement">{{ recipe.createdAt|date('d/m/Y') }}</h4>
+                    {% for ingredient in recipe.ingredients %}
+                        <h4 class="mealElement">{{ ingredient.name }}</h4>
                         <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}" class="mealImage">
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             {% endif %}
         {% endfor %}
     {% else %}
@@ -57,18 +55,17 @@
 </div>
 
 <h3 class="title">Desserts</h3>
-<div class="mealContainer">
+<div class="cards-container">
     {% if recipes is not empty %}
         {% for recipe in recipes %}
-            {% if recipe.isDessert %}
-            <h3> Dessert : </h3>
-                {% for ingredient in recipe.ingredients %}
-                    <div class="mealContent">
-                        <h3 class="mealElement">{{ recipe.createdAt|date('d/m/Y') }}</h3>
-                        <h3 class="mealElement">{{ ingredient.name }}</h3>
+            {% if recipe.isDessert and not recipe.IsPaid %}
+                <div class="card">
+                    <h4 class="mealElement">{{ recipe.createdAt|date('d/m/Y') }}</h4>
+                    {% for ingredient in recipe.ingredients %}
+                        <h4 class="mealElement">{{ ingredient.name }}</h4>
                         <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}" class="mealImage">
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             {% endif %}
         {% endfor %}
     {% else %}
@@ -76,8 +73,7 @@
     {% endif %}
 </div>
 
-<div class="bottom center top"> 
-    <a  class='button' href={{ path('app_calendar_new')}}> Reserver <a>
+<div class="bottom center top">
+    <a class="button" href="{{ path('app_calendar_new') }}">Réserver</a>
 </div>
 {% endblock %}
-
