@@ -36,7 +36,7 @@ class GenreController extends AbstractController
             ]);
     }
 
-    #[Route('admin/genre', name :'view_genre')]
+    #[Route('admin/genre', name :'view_genre', methods:['GET'])]
     public function displayGenre(GenreRepository $repository) : Response
 
     {

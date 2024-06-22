@@ -23,7 +23,7 @@ class RecipesRepository extends ServiceEntityRepository
     public function findByUser($user): array
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.User = :user')
+            ->andWhere('r.user = :user')
             ->setParameter('user', $user)
             ->getQuery()
             ->getResult()

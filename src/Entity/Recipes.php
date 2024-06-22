@@ -21,32 +21,30 @@ class Recipes
     #[ORM\ManyToMany(targetEntity: Ingredients::class, inversedBy: 'recipes')]
     private Collection $ingredients;
 
-    #[ORM\ManyToOne(inversedBy: 'recipes')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'recipes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $User = null;
+    private ?User $user = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'datetime_immutable')]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $reservationAt = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'boolean')]
     private ?bool $isPaid = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, type: 'boolean')]
     private ?bool $isStarter = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, type: 'boolean')]
     private ?bool $isPlate = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, type: 'boolean')]
     private ?bool $isDessert = null;
 
-    #[ORM\ManyToOne(inversedBy: 'recipes')]
+    #[ORM\ManyToOne(targetEntity: Calendar::class, inversedBy: 'recipes')]
     private ?Calendar $calendar = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, type: 'boolean')]
     private ?bool $isServed = null;
 
     public function __construct()
@@ -85,12 +83,12 @@ class Recipes
 
     public function getUser(): ?User
     {
-        return $this->User;
+        return $this->user;
     }
 
     public function setUser(?User $User): static
     {
-        $this->User = $User;
+        $this->user = $User;
 
         return $this;
     }
@@ -103,18 +101,6 @@ class Recipes
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getReservationAt(): ?\DateTimeImmutable
-    {
-        return $this->reservationAt;
-    }
-
-    public function setReservationAt(\DateTimeImmutable $reservationAt): static
-    {
-        $this->reservationAt = $reservationAt;
 
         return $this;
     }

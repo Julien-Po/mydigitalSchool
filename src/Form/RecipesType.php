@@ -37,8 +37,12 @@ class RecipesType extends AbstractType
                 // ]
             ])
 
-            ->add('submit', SubmitType::class, 
-            ["label" => "Envoyer"])
+            ->add('submit', SubmitType::class, [
+                'label' => "Envoyer",
+                'attr' => [
+                    'class' => 'button'
+                ]
+            ])
         ;
     }
 

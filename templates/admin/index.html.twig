@@ -7,7 +7,11 @@
 <nav class="mealNav new">
     <div class="top">
         <a href={{ path('app_recipes_day') }} class="button"> Nos commandes <a>
-        <a href='' class="button"> Les ingrédients <a>
+        <a href={{ path('app_calendar_index') }} class="button"> Le calendrier <a>
+    </div>
+     <div class="top">
+        <a href={{ path('app_genre') }} class="button">Créer des genres  <a>
+        <a href={{ path('app_ingredients') }} class="button"> Créer des ingrédients <a>
     </div>
 </nav>
 {% endblock %}

@@ -1,3 +1,14 @@
 .storyTitle {
     padding-top: 150px;
 }
+
+@media (max-width: 1000px) {
+
+    .storyBorder {
+        flex-direction: column;
+    }
+
+    .storyMid {
+        flex-direction: column-reverse;
+    }
+}

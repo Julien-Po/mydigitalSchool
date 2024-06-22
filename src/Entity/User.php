@@ -25,7 +25,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var list<string> The user roles
      */
-    #[ORM\Column]
+    #[ORM\Column(type: 'json')]
     private array $roles = [];
 
     /**
@@ -37,31 +37,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 75)]
     private ?string $full_name = null;
 
+    
     private ?string $plainPassword = null;
 
     /**
      * @var Collection<int, Recipes>
      */
-    #[ORM\OneToMany(targetEntity: Recipes::class, mappedBy: 'User', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Recipes::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $recipes;
 
     /**
      * @var Collection<int, Calendar>
      */
     #[ORM\OneToMany(targetEntity: Calendar::class, mappedBy: 'user')]
-    private Collection $Calendar;
-
-    /**
-     * @var Collection<int, Recipes>
-     */
-    #[ORM\OneToMany(targetEntity: Recipes::class, mappedBy: 'user')]
-    private Collection $Recipes;
+    private Collection $calendar;
 
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
-        $this->Calendar = new ArrayCollection();
-        $this->Recipes = new ArrayCollection();
+        $this->calendar = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -198,13 +192,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getCalendar(): Collection
     {
-        return $this->Calendar;
+        return $this->calendar;
     }
 
     public function addCalendar(Calendar $calendar): static
     {
-        if (!$this->Calendar->contains($calendar)) {
-            $this->Calendar->add($calendar);
+        if (!$this->calendar->contains($calendar)) {
+            $this->calendar->add($calendar);
             $calendar->setUser($this);
         }
 
@@ -213,7 +207,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeCalendar(Calendar $calendar): static
     {
-        if ($this->Calendar->removeElement($calendar)) {
+        if ($this->calendar->removeElement($calendar)) {
             // set the owning side to null (unless already changed)
             if ($calendar->getUser() === $this) {
                 $calendar->setUser(null);

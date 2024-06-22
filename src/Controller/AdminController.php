@@ -35,18 +35,19 @@ class AdminController extends AbstractController
         }else{
             $date = new \DateTimeImmutable('now');
         }
-                    //$recipesOfTheDay = $calendarRepository->findCalendarsByDate($date);
-        $recipesOfTheDay = $calendarRepository->findCalendarsByStartDate($date);
+
+        $recipesOfTheDay = $calendarRepository->findCalendarsByDate($date);
+       
         return $this->render('admin/recipesByDate.html.twig', [
             'form' => $form->createView(),
             'recipesOfTheDay' => $recipesOfTheDay
-        ]);;
+        ]);
     }
 
     #[Route('/recipesByUser/{clientId}', name: 'app_recipes_user')]
     public function ingredientsByDay(RecipesRepository $recipesRepository, $clientId): Response
     {
-        $recipesByUser = $recipesRepository->findBy(['User' => $clientId, 'isServed' => false]);
+        $recipesByUser = $recipesRepository->findBy(['user' => $clientId, 'isServed' => false]);
          return $this->render('admin/recipesByUser.html.twig', [
             'recipesByUser' => $recipesByUser
          ]);
@@ -63,4 +64,6 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('app_recipes_user', ['clientId' => $recipe->getUser()->getId()]);
     }
+
+
 }

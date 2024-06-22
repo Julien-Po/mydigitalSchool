@@ -19,21 +19,34 @@ class IngredientsType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                "label" => "Nom"
+                "label" => "Nom",
+                'label_attr' => [
+                    'class' => 'textStyle'
+                ],
             ])
             ->add('image', FileType::class, [
                 "mapped" => false, 
                 "required" => false
             ])
             ->add('allergene', TextType::class, [
-                "label" => "Allergene"
+                "label" => "Allergene",
+
+                'label_attr' => [
+                    'class' => 'textStyle'
+                ],
             ])
             ->add('genre', EntityType::class, [
                 'class' => Genre::class,
                 'choice_label' => 'name',
+                'label_attr' => [
+                    'class' => 'textStyle'
+                ],
             ])
             ->add('submit', SubmitType::class, 
-            ["label" => "Envoyer"])
+            ["label" => "Envoyer",
+            "attr" => [
+                'class' => 'button'
+            ]])
 
         ;
     }

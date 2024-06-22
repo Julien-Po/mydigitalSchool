@@ -7,80 +7,112 @@
 
     <h2 class="title">Total de la réservation : </h2>
 
-    <p>Pour valider votre réservation un accompte de 30% est requis</p>
+    <p class="textStyle">Pour valider votre réservation un accompte de 30% est requis</p>
 
     <h2 class="title">Total à payer : </h2>
 
     <h2 class="title">Options de paiement :</h2>
 
-    <p>Veuillez sélectionner votre méthode de paiement :</p>
+    <p class="textStyle">Veuillez sélectionner votre méthode de paiement :</p>
 
     <div class="paymentFlex">
-        <input type="checkbox" id="carte-bancaire">
-        <label for="carte-bancaire">Carte bancaire</label>
+        <input type="radio" id="carte-bancaire" name="payment-method" value="carte-bancaire" onclick="togglePaymentForm('carte-bancaire')">
+        <label for="carte-bancaire" class="textStyle">Carte bancaire</label>
     </div>
 
     <div class="paymentFlex">
-        <input type="checkbox" id="paypal">
-        <label for="paypal">Paypal</label>
+        <input type="radio" id="paypal" name="payment-method" value="paypal" onclick="togglePaymentForm('paypal')">
+        <label for="paypal" class="textStyle">Paypal</label>
     </div>
 
     <div class="paymentFlex">
-        <input type="checkbox" id="apple-pay">
-        <label for="apple-pay">Apple Pay</label>
+        <input type="radio" id="apple-pay" name="payment-method" value="apple-pay" onclick="togglePaymentForm('apple-pay')">
+        <label for="apple-pay" class="textStyle">Apple Pay</label>
     </div>
 
     <div class="paymentFlex">
-        <input type="checkbox" id="google-pay">
-        <label for="google-pay">Google Pay</label>
+        <input type="radio" id="google-pay" name="payment-method" value="google-pay" onclick="togglePaymentForm('google-pay')">
+        <label for="google-pay" class="textStyle">Google Pay</label>
     </div>
 
     {{ form_start(form) }}
 
-    <div class="spaced spacedTop">
-        {{ form_label(form.cardNumber) }}
+    <div id="carte-bancaire-form" class="payment-form">
+        <div class="spaced spacedTop textStyle">
+            {{ form_label(form.cardNumber) }}
+        </div>
+        <div class="inputSpaced">
+            {{ form_widget(form.cardNumber) }}
+        </div>
+
+        <div class="spaced textStyle">
+            {{ form_label(form.cardHolderName) }}
+        </div>
+        <div class="inputSpaced">
+            {{ form_widget(form.cardHolderName) }}
+        </div>
+
+        <div class="spaced textStyle">
+            {{ form_label(form.expiryDate) }}
+        </div>
+        <div class="inputSpaced">
+            {{ form_widget(form.expiryDate) }}
+        </div>
+
+        <div class="spaced textStyle">
+            {{ form_label(form.cvv) }}
+        </div>
+        <div class="inputSpaced">
+            {{ form_widget(form.cvv) }}
+        </div>
+
+        <div class="spaced textStyle">
+            {{ form_label(form.amount) }}
+        </div>
+        <div class="inputSpaced">
+            {{ form_widget(form.amount) }}
+        </div>
     </div>
-    <div class="inputSpaced">
-        {{ form_widget(form.cardNumber) }}
+
+  <div id="paypal-form" class="payment-form" style="display: none;">
+        <div class="spaced">
+            {{ form_label(form.paypalEmail) }}
+            {{ form_widget(form.paypalEmail) }}
+        </div>
+    </div>
+
+    <div id="apple-pay-form" class="payment-form" style="display: none;">
+        <div class="spaced">
+            {{ form_label(form.applePayId) }}
+            {{ form_widget(form.applePayId) }}
+        </div>
+    </div>
+
+    <div id="google-pay-form" class="payment-form" style="display: none;">
+        <div class="spaced">
+            {{ form_label(form.googlePayId) }}
+            {{ form_widget(form.googlePayId) }}
+        </div>
     </div>
 
     <div class="spaced">
-        {{ form_label(form.cardHolderName) }}
-    </div>
-    <div class="inputSpaced">
-        {{ form_widget(form.cardHolderName) }}
-    </div>
-
-    <div class="spaced">
-        {{ form_label(form.expiryDate) }}
-    </div>
-    <div class="inputSpaced">
-        {{ form_widget(form.expiryDate) }}
-    </div>
-
-    <div class="spaced">
-        {{ form_label(form.cvv) }}
-    </div>
-    <div class="inputSpaced">
-        {{ form_widget(form.cvv) }}
-    </div>
-
-    <div class="spaced">
-        {{ form_label(form.amount) }}
-    </div>
-    <div class="inputSpaced">
-        {{ form_widget(form.amount) }}
-    </div>
-
-    <div class="spaced">
-        {{ form_label(form.submit) }}
-    </div>
-    <div class="inputSpaced">
         {{ form_widget(form.submit) }}
     </div>
-<div class="spacedBottom"></div>
+    <div class="spacedBottom"></div>
 
     {{ form_end(form) }}
 </div>
+
+<script>
+function togglePaymentForm(paymentMethod) {
+    // Hide all payment forms
+    document.querySelectorAll('.payment-form').forEach(function(form) {
+        form.style.display = 'none';
+    });
+
+    // Show the selected payment form
+    document.getElementById(paymentMethod + '-form').style.display = 'block';
+}
+</script>
 
 {% endblock %}

@@ -25,9 +25,9 @@ class Calendar
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Calendar')]
+    #[ORM\ManyToOne(inversedBy: 'calendar')]
     private ?User $user = null;
-
+    
     /**
      * @var Collection<int, Recipes>
      */

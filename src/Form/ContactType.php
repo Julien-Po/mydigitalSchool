@@ -33,7 +33,10 @@ class ContactType extends AbstractType
                 'label' => 'Message'
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Envoyer'
+                'label' => 'Envoyer',
+                 'attr' => [
+                    'class' => 'button'
+                 ]
             ])
         ;
     }

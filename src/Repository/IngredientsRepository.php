@@ -41,8 +41,7 @@ class IngredientsRepository extends ServiceEntityRepository
             return $query->getSingleResult();
         } catch (NoResultException $e) {
             return null;
-        }
-            
+        }      
     }
 
     //    /**
