@@ -1,8 +1,7 @@
 twig:
-    file_name_pattern: '*.twig'
+    default_path: '%kernel.project_dir%/templates'
+    debug: true
 
 when@test:
     twig:
         strict_variables: true
-    extensions:
-        - Twig\Extra\Random\RandomExtension

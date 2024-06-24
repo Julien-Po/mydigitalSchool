@@ -4,55 +4,49 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Service\ContactService;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'app_contact')]
-    public function index(Request $request, EntityManagerInterface $manager, MailerInterface $mailer): Response
+    public function index(Request $request, EntityManagerInterface $manager, ContactService $contactService): Response
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
-        
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $contact = $form->getData();
 
-            $manager->persist($contact);
-            $manager->flush();
+            // Préparer les données du contact sous forme de tableau
+            $contactData = [
+                'name' => $contact->getFullName(),
+                'email' => $contact->getEmail(),
+                'subject' => $contact->getSubject(),
+                'message' => $contact->getMessage(),
+            ];
 
-            $email = (new TemplatedEmail())
-                ->from($contact->getEmail())
-                ->to('poirierjulien30@gmail.com')
-                ->subject($contact->getSubject())
-                ->htmlTemplate('contact/index.html.twig')
-                ->locale('de')
-                ->context([
-                    'contact' => $contact
-                ]);
+            try {
+                // Utiliser le service pour envoyer l'e-mail
+                $contactService->sendContactEmail($contactData);
 
-            $mailer->send($email);
+                // Ajouter un message flash de succès
+                $this->addFlash('success', 'Votre message a été envoyé avec succès.');
+            } catch (\Exception $e) {
+                // Ajouter un message flash d'erreur en cas de problème
+                $this->addFlash('error', 'Une erreur s\'est produite lors de l\'envoi de votre message : ' . $e->getMessage());
+            }
+
+            return $this->redirectToRoute('app_contact');
         }
 
-        return $this->render('contact/index.html.twig', [
+        return $this->render('contact/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
-
-    // public function findUserByEmailOrUsername(string $usernameOrEmail): ?User 
-    // {
-    //     return $this->createQueryBuilder('u')
-    //             ->where('u.email = :identifier')
-    //             ->orWhere('u.username = :identifier')
-    //             ->setParameter('identifier' , $usernameOrEmail)
-    //             ->setMaxResults(1)
-    //             ->getQuery()
-    //             ->getSingleResult();
-    // }
 }

@@ -19,7 +19,10 @@ class CalendarType extends AbstractType
 
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Nom de la réservation'
+                'label' => 'Nom de la réservation', 
+                'attr' => [
+                    'autocomplete' => 'off',
+                ],
             ])
             ->add('start', DateTimeType::class, [
                 'date_widget' => 'single_text',

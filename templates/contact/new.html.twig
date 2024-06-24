@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+<div class="new offTop">
+    {{ form_start(form) }}
+    <div class="spacing center top textStyle ">
+        {{ form_label(form.fullName) }}
+    </div>
+    <div class="inputSpacing center">
+        {{ form_widget(form.fullName) }}
+    </div>
+
+    <div class="spacing center textStyle">
+        {{ form_label(form.email) }}
+    </div>
+    <div class="inputSpacing center">
+        {{ form_widget(form.email) }}
+    </div>
+    <div class="spacing center textStyle">
+        {{ form_label(form.subject) }}
+    </div>
+    <div class="inputSpacing center">
+        {{ form_widget(form.subject) }}
+    </div>
+    <div class="spacing center textStyle">
+        {{ form_label(form.message) }}
+    </div>
+    <div class="inputSpacing">
+        {{ form_widget(form.message) }}
+    </div>
+    <div class="submitGenre">
+        {{ form_widget(form.submit) }}
+    </div>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

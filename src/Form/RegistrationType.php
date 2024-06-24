@@ -18,11 +18,17 @@ class RegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class, [
-                'label' => 'Adresse email',
-                'label_attr' => [
-                    'class' => 'textStyle'
-                ],
+        ->add('email', EmailType::class, [
+            'attr' => [
+                'autocomplete' => 'off',
+            ],
+            'label' => 'Adresse email',
+            'label_attr' => [
+                'class' => 'textStyle',
+            ],
+      
+    
+               
                 'constraints' => [
                     new Assert\Email([
                         'message' => 'Veuillez entrer une adresse email valide.',
@@ -69,7 +75,8 @@ class RegistrationType extends AbstractType
                     'class' => 'textStyle'
                 ],
                 'attr' => [
-                    'class' => 'registrationFullName'
+                    'class' => 'registrationFullName',
+                    'autocomplete' => 'off'
                 ],
                 'constraints' => [
                     new Assert\NotBlank([

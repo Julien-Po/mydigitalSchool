@@ -30,6 +30,9 @@ class PaymentType extends AbstractType
                 ]
             ])
             ->add('cardHolderName', TextType::class, [
+                'attr' => [
+                    'autocomplete' => 'off',
+                ],
                 'label' => 'Nom du possesseur de la carte',
                 'label_attr' => [
                     'class' => 'textStyle'
@@ -88,6 +91,9 @@ class PaymentType extends AbstractType
                 ]
             ])
             ->add('applePayId', TextType::class, [
+                'attr' => [
+                    'autocomplete' => 'off',
+                ],
                 'label' => 'Apple Pay ID',
                 'label_attr' => [
                     'class' => 'textStyle'
@@ -96,6 +102,9 @@ class PaymentType extends AbstractType
                 // Ajoutez des contraintes si nécessaire
             ])
             ->add('googlePayId', TextType::class, [
+                'attr' => [
+                    'autocomplete' => 'off',
+                ],
                 'label' => 'Google Pay ID',
                 'label_attr' => [
                     'class' => 'textStyle'

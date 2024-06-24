@@ -23,7 +23,6 @@ class CalendarRepository extends ServiceEntityRepository
  */
 public function findCalendarsByDate(\DateTimeInterface $date): array
 {
-    // Assurez-vous que la date passée est bien de type DateTimeImmutable
     if (!$date instanceof \DateTimeImmutable) {
         $date = \DateTimeImmutable::createFromMutable($date);
     }

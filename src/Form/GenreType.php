@@ -16,6 +16,9 @@ class GenreType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Nom',
+                'attr' => [
+                    'autocomplete' => 'off',
+                ],
             ])
             ->add('submit', SubmitType::class, 
             ["label" => "Envoyer",

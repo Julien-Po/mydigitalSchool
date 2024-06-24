@@ -4,45 +4,45 @@
 
 {% endblock %}
 {% block main %}
-<div class="new">
-    {{ form_start(form) }}
+    <div class="new">
+        {{ form_start(form) }}
 
-    <div class="spacing top">
-        {{ form_label(form.email) }}
-        <div class="inputSpacing">
-            {{ form_widget(form.email) }}
-            <div class="textStyle">{{ form_errors(form.email) }}</div>
+        <div class="spacing top">
+            {{ form_label(form.email) }}
+            <div class="inputSpacing">
+                {{ form_widget(form.email) }}
+                <div class="textStyle">{{ form_errors(form.email) }}</div>
+            </div>
         </div>
-    </div>
 
-    <div class="spacing">
-        {{ form_label(form.fullname) }}
-        <div class="inputSpacing">
-            {{ form_widget(form.fullname) }}
-            <div class="textStyle">{{ form_errors(form.fullname) }}</div>
+        <div class="spacing">
+            {{ form_label(form.fullname) }}
+            <div class="inputSpacing">
+                {{ form_widget(form.fullname) }}
+                <div class="textStyle">{{ form_errors(form.fullname) }}</div>
+            </div>
         </div>
-    </div>
 
-    <div class="spacing">
-        {{ form_label(form.plainPassword.first) }}
-        <div class="inputSpacing">
-            {{ form_widget(form.plainPassword.first) }}
-            <div class="textStyle">{{ form_errors(form.plainPassword.first) }}</div>
+        <div class="spacing">
+            {{ form_label(form.plainPassword.first) }}
+            <div class="inputSpacing">
+                {{ form_widget(form.plainPassword.first) }}
+                <div class="textStyle">{{ form_errors(form.plainPassword.first) }}</div>
+            </div>
         </div>
-    </div>
 
-    <div class="spacing">
-        {{ form_label(form.plainPassword.second) }}
-        <div class="inputSpacing">
-            {{ form_widget(form.plainPassword.second) }}
-            <div class="textStyle">{{ form_errors(form.plainPassword.second) }}</div>
+        <div class="spacing">
+            {{ form_label(form.plainPassword.second) }}
+            <div class="inputSpacing">
+                {{ form_widget(form.plainPassword.second) }}
+                <div class="textStyle">{{ form_errors(form.plainPassword.second) }}</div>
+            </div>
         </div>
-    </div>
 
-    <div class="spacing">
-        {{ form_widget(form.submit) }}
-    </div>
+        <div class="spacing">
+            {{ form_widget(form.submit) }}
+        </div>
 
-    {{ form_end(form) }}
-</div>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
