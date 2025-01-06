@@ -3,9 +3,9 @@
 {% block title %}Choisissez vos ingrédients{% endblock %}
 
 {% block main %}
-<h1 class="new">Choisissez vos ingrédients</h1>
+<h1 class="new textStyle">Choisissez vos ingrédients</h1>
 
-<div class="searchInput">
+<div class="searchInput textStyle">
     <label for="genre-select">Filtrer par genre :</label>
     <select id="genre-select">
         <option value="all">Tous</option>
@@ -33,11 +33,11 @@
         </form>
     </div>
     
-    <div id="selected-ingredients-container">
+    {# <div id="selected-ingredients-container">
         <h2 class="textStyle">Panier</h2>
         <ul id="selected-ingredients-list" class="textStyle"></ul>
     </div>
-</div>
+</div> #}
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {

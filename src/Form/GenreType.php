@@ -19,6 +19,9 @@ class GenreType extends AbstractType
                 'attr' => [
                     'autocomplete' => 'off',
                 ],
+                'label_attr' => [
+                    'class' => 'textStyle'
+                ],
             ])
             ->add('submit', SubmitType::class, 
             ["label" => "Envoyer",

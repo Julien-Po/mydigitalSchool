@@ -31,7 +31,7 @@
             {% endif %}
         {% endfor %}
     {% else %}
-        <p>Vous n'avez pas encore commandé d'entrée</p>
+        <p class="default-text">Vous n'avez pas encore commandé d'entrée</p>
     {% endif %}
 </div>
 
@@ -46,11 +46,12 @@
                         <h4 class="mealElement">{{ ingredient.name }}</h4>
                         <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}" class="mealImage">
                     {% endfor %}
+                    <a href="{{ path('delete_recipes', {'id': recipe.id}) }}" class="mealElement">Supprimer le plat</a>
                 </div>
             {% endif %}
         {% endfor %}
     {% else %}
-        <p>No plates found.</p>
+        <p class="default-text">Vous n'avez pas encore commandé de plat</p>
     {% endif %}
 </div>
 
@@ -65,11 +66,12 @@
                         <h4 class="mealElement">{{ ingredient.name }}</h4>
                         <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}" class="mealImage">
                     {% endfor %}
+                    <a href="{{ path('delete_recipes', {'id': recipe.id}) }}" class="mealElement">Supprimer le plat</a>    
                 </div>
             {% endif %}
         {% endfor %}
     {% else %}
-        <p>No desserts found.</p>
+        <p class="default-text">Vous n'avez pas encore commandé de dessert</p>
     {% endif %}
 </div>
 

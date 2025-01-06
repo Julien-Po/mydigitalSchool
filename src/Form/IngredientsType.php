@@ -28,7 +28,7 @@ class IngredientsType extends AbstractType
             ])
             ->add('image', FileType::class, [
                 "mapped" => false, 
-                "required" => false
+                "required" => false,
             ])
             ->add('allergene', TextType::class, [
                 'attr' => [
@@ -46,6 +46,7 @@ class IngredientsType extends AbstractType
                 'label_attr' => [
                     'class' => 'textStyle'
                 ],
+                
             ])
             ->add('submit', SubmitType::class, 
             ["label" => "Envoyer",

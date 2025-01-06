@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Contacts{% endblock %}
+
+{% block main %}
+    <h1 class="spacingTop title">Liste des Contacts</h1>
+
+    {% if contacts is empty %}
+        <p>Aucun contact trouvé.</p>
+    {% else %}
+        <div class="cards-container spacingTop">
+            {% for contact in contacts %}
+                <div class="card">
+                    <h2 class="textStyle">{{ contact.fullName }}</h2>
+                    <p class="textStyle">Email: {{ contact.email }}</p>
+                    <p class="textStyle">Sujet: {{ contact.subject }}</p>
+                    <p class="textStyle">Message: {{ contact.message }}</p>
+                    <a href="{{ path('app_contact_delete', { 'id': contact.id }) }}">Supprimer</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+

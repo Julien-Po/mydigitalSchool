@@ -23,10 +23,16 @@ class CalendarType extends AbstractType
                 'attr' => [
                     'autocomplete' => 'off',
                 ],
+                'label_attr' => [
+                    'class' => 'textStyle'
+                ],
             ])
             ->add('start', DateTimeType::class, [
                 'date_widget' => 'single_text',
                 'label' => 'Date et heure de la réservation',
+                'label_attr' => [
+                    'class' => 'textStyle'
+                ],
                 'hours' => range(12, 22), // Limite de 9h à 17h,
                 'constraints' => [
                     new GreaterThanOrEqual([
@@ -37,7 +43,10 @@ class CalendarType extends AbstractType
                 ]
             ])
             ->add('description', TextType::class, [
-                'label' => 'Précisions ( Nombre de personne, régime spécifique )'
+                'label' => 'Précisions ( Nombre de personne, régime spécifique )',
+                'label_attr' => [
+                    'class' => 'textStyle'
+                ],
             ])
         ;
     }

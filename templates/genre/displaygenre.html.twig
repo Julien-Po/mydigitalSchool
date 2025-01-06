@@ -2,19 +2,21 @@
 
 {% block body %}
 
-<div class="table">
+<div class="table bottom">
     <table>
         <thead>
             <tr>
-                <th>Liste des genres</th>
+                <th class="title">Liste des genres</th>
             </tr>
         </thead>
         <tbody>
+        <div class="title">
             {% for genre in genres %}
+        </div>
                 <tr>
                     <td>
-                        {{ genre.name }}
-                        <a href="{{ path('edit_genre', { 'id': genre.id }) }}">Modifier</a>
+                        <h2 class="textStyle">{{ genre.name }}</h2>
+                        <a href="{{ path('edit_genre', { 'id': genre.id }) }} ">Modifier</a>
                         <a href="{{ path('delete_genre', { 'id': genre.id }) }}">Supprimer</a>
                     </td>
                 </tr>

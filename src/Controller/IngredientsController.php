@@ -58,7 +58,6 @@ class IngredientsController extends AbstractController
     #[Route('admin/ingredients/update/{id}', name : 'edit_ingredients')]
     public function editIngredient(IngredientsRepository $repository, int $id, Request $request, EntityManagerInterface $manager) : Response
     {
-        $ingredients = new Ingredients();
         $ingredients = $repository->findOneBy(["id" => $id]);
         $form = $this->createForm(IngredientsType::class, $ingredients);
 
@@ -82,14 +81,27 @@ class IngredientsController extends AbstractController
     #[Route('admin/ingredients/delete/{id}', name : 'delete_ingredients', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Ingredients $ingredients) : Response
     {
-        $manager->remove($ingredients);
-        $manager->flush();
-
+        {
+            // Vérifie si l'utilisateur est connecté et a le rôle ADMIN
+            if ($this->isGranted('ROLE_ADMIN')) {
+                $manager->remove($ingredients);
+                $manager->flush();
+    
+                $this->addFlash(
+                    'success',
+                    'Votre ingredient a été supprimé avec succès !'
+                );
+    
+                return $this->redirectToRoute('display_ingredients');
+            }
+    
+            // Rediriger ou afficher un message si l'utilisateur n'a pas les droits nécessaires
             $this->addFlash(
-                'success',
-                'Votre ingredient a été supprimé avec succès !'
+                'error',
+                'Vous n\'avez pas les droits nécessaires pour supprimer cet ingrédient.'
             );
-
-        return $this->redirectToRoute('display_ingredients');
+    
+            return $this->redirectToRoute('display_ingredients');
+        }
     }
-}   
+}

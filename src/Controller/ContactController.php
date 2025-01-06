@@ -18,11 +18,11 @@ class ContactController extends AbstractController
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
-
+    
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $contact = $form->getData();
-
+    
             // Préparer les données du contact sous forme de tableau
             $contactData = [
                 'name' => $contact->getFullName(),
@@ -30,23 +30,30 @@ class ContactController extends AbstractController
                 'subject' => $contact->getSubject(),
                 'message' => $contact->getMessage(),
             ];
-
+    
             try {
                 // Utiliser le service pour envoyer l'e-mail
                 $contactService->sendContactEmail($contactData);
-
+    
+                // Persister l'entité Contact dans la base de données
+                $manager->persist($contact);
+                $manager->flush();
+    
                 // Ajouter un message flash de succès
-                $this->addFlash('success', 'Votre message a été envoyé avec succès.');
+                $this->addFlash('success', 'Votre message a été envoyé avec succès et enregistré dans la base de données.');
             } catch (\Exception $e) {
                 // Ajouter un message flash d'erreur en cas de problème
                 $this->addFlash('error', 'Une erreur s\'est produite lors de l\'envoi de votre message : ' . $e->getMessage());
             }
-
+    
             return $this->redirectToRoute('app_contact');
         }
-
+    
         return $this->render('contact/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
+
+ 
+    
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
 use App\Form\DateFormType;
 use App\Repository\CalendarRepository;
 use App\Repository\RecipesRepository;
@@ -64,6 +65,38 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('app_recipes_user', ['clientId' => $recipe->getUser()->getId()]);
     }
+
+    #[Route('/contacts', name: 'app_contact_list')]
+    public function showContacts(EntityManagerInterface $manager): Response
+{
+    $contacts = $manager->getRepository(Contact::class)->findAll();
+
+    return $this->render('contact/list.html.twig', [
+        'contacts' => $contacts,
+    ]);
+}
+
+#[Route('/contact/delete/{id}', name: 'app_contact_delete', methods: ['GET'])]
+public function delete(int $id, EntityManagerInterface $manager): Response
+{
+    // Récupérer le message par ID
+    $contact = $manager->getRepository(Contact::class)->find($id);
+
+    if ($contact) {
+        // Supprimer le message
+        $manager->remove($contact);
+        $manager->flush();
+
+        // Ajouter un message flash de succès
+        $this->addFlash('success', 'Le message a été supprimé avec succès.');
+    } else {
+        // Ajouter un message flash d'erreur en cas de message non trouvé
+        $this->addFlash('error', 'Message non trouvé.');
+    }
+
+    // Rediriger vers la liste des messages ou une autre page
+    return $this->redirectToRoute('app_contact_list');
+}
 
 
 }

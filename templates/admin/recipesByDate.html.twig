@@ -13,7 +13,7 @@
                     <div class="card">
                         <h2 class="title">{{ calendar.title }}</h2>
                         <p class="textStyle">Description : {{ calendar.description }}</p>
-                        <p class="textStyle">Date de début: {{ calendar.start|date('Y-m-d H:i') }}</p>
+                        <p class="textStyle">Date de la réservation : {{ calendar.start|date('d-m-Y H:i') }}</p>
                         <p class="textStyle">Recette par: {{ calendar.user.fullName }}</p>
                         <a class="button" href="{{ path('app_recipes_user', {'clientId': calendar.user.id}) }}">Détails de la commande</a>
                     </div>

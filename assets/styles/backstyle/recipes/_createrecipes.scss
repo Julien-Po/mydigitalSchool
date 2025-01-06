@@ -6,10 +6,10 @@
 }
 
 .recipesSubmit {
-  position: fixed;
-  top: 80vh;
-  left: 90vw;
-  transform: translate(-50%,-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 150px;
   button{
     border: none;
     background-color: rgba(255, 255, 255, 0);
