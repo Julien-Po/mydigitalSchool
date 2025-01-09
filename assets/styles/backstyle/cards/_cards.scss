@@ -33,6 +33,16 @@
   margin: 8px 0;
 }
 
+.ingredient-image {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.ingredient-image.selected {
+  transform: scale(1.1);
+  border: 2px solid green;
+}
+
 
 /* Responsivité pour les écrans plus petits */
 @media screen and (max-width: 1200px) {

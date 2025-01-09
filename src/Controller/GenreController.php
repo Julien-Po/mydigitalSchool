@@ -53,7 +53,7 @@ class GenreController extends AbstractController
         $genre = $repository->findOneBy(["id" => $id]);
         
         if (!$genre) {
-            throw $this->createNotFoundException('Genre not found');
+            throw $this->createNotFoundException("Le genre n'a pas été trouvé");
         }
     
         $form = $this->createForm(GenreType::class, $genre);

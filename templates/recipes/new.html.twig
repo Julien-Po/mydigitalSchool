@@ -20,11 +20,13 @@
         <form id="ingredients-form" action="{{ path('app_recipes', {'type': type }) }}" method="post">
             <div class="cards-container" id="ingredients-container">
                 {% for ingredient in ingredients %}
-                    <div class="card" data-genre="{{ ingredient.genre.id }}">
-                        <h2 for="">{{ ingredient.name }}</h2>
-                        <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}">
-                        <input type="checkbox" name="ingredients[]" value="{{ ingredient.id }}" class="ingredient-checkbox">
-                    </div>
+                 <div class="card" data-genre="{{ ingredient.genre.id }}">
+                     <label>
+                         <h2>{{ ingredient.name }}</h2>
+                        <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}" class="ingredient-image">
+                        <input type="checkbox" name="ingredients[]" value="{{ ingredient.id }}" class="ingredient-checkbox" style="display: none;">
+                    </label>
+                </div>
                 {% endfor %}
             </div>
             <div class="recipesSubmit">
@@ -47,22 +49,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedIngredientsList = document.getElementById('selected-ingredients-list');
     const genreSelect = document.getElementById('genre-select');
     const ingredientsContainer = document.getElementById('ingredients-container');
+    const images = document.querySelectorAll('.ingredient-image');
 
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', () => {
-            updateSelectedIngredients();
-        });
-    });
-
-    genreSelect.addEventListener('change', () => {
-        filterIngredientsByGenre();
-    });
-
+    // Mise à jour des ingrédients sélectionnés
     function updateSelectedIngredients() {
         selectedIngredientsList.innerHTML = '';
         checkboxes.forEach(checkbox => {
             if (checkbox.checked) {
-                const label = checkbox.previousElementSibling.previousElementSibling.textContent;
+                const label = checkbox.previousElementSibling.previousElementSibling.textContent; // Trouve le nom de l'ingrédient
                 const listItem = document.createElement('h3');
                 listItem.textContent = label;
                 selectedIngredientsList.appendChild(listItem);
@@ -70,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Filtrer les ingrédients par genre
     function filterIngredientsByGenre() {
         const selectedGenre = genreSelect.value;
         const cards = ingredientsContainer.querySelectorAll('.card');
@@ -83,8 +78,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Gestion des événements sur les checkboxes
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateSelectedIngredients);
+    });
+
+    // Gestion des événements sur le sélecteur de genre
+    genreSelect.addEventListener('change', filterIngredientsByGenre);
+
+    // Gestion des événements sur les images
+    images.forEach((image, index) => {
+        image.addEventListener('click', () => {
+            checkboxes[index].checked = !checkboxes[index].checked; // Toggle checkbox
+            image.classList.toggle('selected'); // Ajoute ou retire la classe pour le feedback visuel
+            updateSelectedIngredients(); // Met à jour la liste des ingrédients sélectionnés
+        });
+    });
+
+    // Initialisation
     filterIngredientsByGenre();
 });
-</script>
+
 {% endblock %}
 
