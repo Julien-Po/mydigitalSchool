@@ -21,9 +21,11 @@
             <div class="cards-container" id="ingredients-container">
                 {% for ingredient in ingredients %}
                     <div class="card" data-genre="{{ ingredient.genre.id }}">
+                        <label>
                         <h2 for="">{{ ingredient.name }}</h2>
                         <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}">
                         <input type="checkbox" name="ingredients[]" value="{{ ingredient.id }}" class="ingredient-checkbox">
+                        </label>
                     </div>
                 {% endfor %}
             </div>

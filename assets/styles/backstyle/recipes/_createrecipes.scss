@@ -4,12 +4,16 @@
     margin-right: 20px;
     margin-bottom: 50px;
 }
+.ingredient-checkbox {
+  visibility: hidden;
+}
 
 .recipesSubmit {
   display: flex;
   align-items: center;
   justify-content: center;
   padding-bottom: 150px;
+  
   button{
     border: none;
     background-color: rgba(255, 255, 255, 0);
