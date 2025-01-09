@@ -20,13 +20,13 @@
         <form id="ingredients-form" action="{{ path('app_recipes', {'type': type }) }}" method="post">
             <div class="cards-container" id="ingredients-container">
                 {% for ingredient in ingredients %}
-                 <div class="card" data-genre="{{ ingredient.genre.id }}">
-                     <label>
-                         <h2>{{ ingredient.name }}</h2>
-                        <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}" class="ingredient-image">
-                        <input type="checkbox" name="ingredients[]" value="{{ ingredient.id }}" class="ingredient-checkbox" style="display: none;">
-                    </label>
-                </div>
+                    <div class="card" data-genre="{{ ingredient.genre.id }}">
+                        <label>
+                            <h2>{{ ingredient.name }}</h2>
+                            <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}" class="ingredient-image">
+                            <input type="checkbox" name="ingredients[]" value="{{ ingredient.id }}" class="ingredient-checkbox" style="display: none;">
+                        </label>
+                    </div>
                 {% endfor %}
             </div>
             <div class="recipesSubmit">
@@ -35,12 +35,14 @@
         </form>
     </div>
     
-    {# <div id="selected-ingredients-container">
+    <div id="selected-ingredients-container">
         <h2 class="textStyle">Panier</h2>
         <ul id="selected-ingredients-list" class="textStyle"></ul>
     </div>
-</div> #}
+</div>
+{% endblock %}
 
+{% block javascripts %}
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('ingredients-form');
@@ -50,6 +52,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const genreSelect = document.getElementById('genre-select');
     const ingredientsContainer = document.getElementById('ingredients-container');
     const images = document.querySelectorAll('.ingredient-image');
+
+    if (images.length === 0 || checkboxes.length === 0) {
+        console.error('Éléments non trouvés.');
+        return;
+    }
 
     // Mise à jour des ingrédients sélectionnés
     function updateSelectedIngredients() {
@@ -98,6 +105,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialisation
     filterIngredientsByGenre();
 });
-
+</script>
 {% endblock %}
-
