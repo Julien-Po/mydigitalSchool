@@ -47,14 +47,13 @@ class IngredientsRepository extends ServiceEntityRepository
        /**
         * @return Ingredients[] Returns an array of Ingredients objects
         */
-       public function findIngredients(): array
-       {
-           return $this->createQueryBuilder('i')
-               ->where('i.id <= 100000')
-               ->getQuery()
-               ->getResult()
-           ;
-       }
+        public function findIngredients(): array
+        {
+            return $this->createQueryBuilder('i')
+                ->getQuery()
+                ->getResult();
+        }
+        
 
     //    public function findOneBySomeField($value): ?Ingredients
     //    {
