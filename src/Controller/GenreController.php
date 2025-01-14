@@ -40,7 +40,7 @@ class GenreController extends AbstractController
     public function displayGenre(GenreRepository $repository) : Response
 
     {
-        $genre = $repository->findAll();
+        $genre = $repository->findGenre();
 
         return $this->render('genre/displaygenre.html.twig', [
             'genres'=>$genre

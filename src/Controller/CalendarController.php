@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CalendarController extends AbstractController
 {
 
-    #[Route('/calendar/indexCalendar', name: 'app_calendar_display', methods: ['GET'])]
+    #[Route('admin/calendar/indexCalendar', name: 'app_calendar_display', methods: ['GET'])]
     public function displayCalendar(CalendarRepository $calendarRepository): Response
     {
         return $this->render('calendar/main.html.twig', [
@@ -27,6 +27,7 @@ class CalendarController extends AbstractController
     public function index(CalendarRepository $calendarRepository): Response
     {
         $events = $calendarRepository->findAll();
+        
     
         $rdv = [];
         foreach($events as $event){

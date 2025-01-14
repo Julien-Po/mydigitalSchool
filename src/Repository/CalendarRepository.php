@@ -45,20 +45,17 @@ public function findCalendarsByDate(\DateTimeInterface $date): array
 
 
 
-//    /**
-//     * @return Calendar[] Returns an array of Calendar objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return Calendar[] Returns an array of Calendar objects
+    */
+   public function findCalendar(): array
+   {
+       return $this->createQueryBuilder('c')
+           ->select('c.id, c.title, c.start, c.description') 
+           ->getQuery()
+           ->getResult()
+       ;
+   }
 
 //    public function findOneBySomeField($value): ?Calendar
 //    {
