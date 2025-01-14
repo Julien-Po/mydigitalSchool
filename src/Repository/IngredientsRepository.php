@@ -50,6 +50,7 @@ class IngredientsRepository extends ServiceEntityRepository
         public function findIngredients(): array
         {
             return $this->createQueryBuilder('i')
+                ->select("i.id, i.name, i.image, i.allergene")
                 ->getQuery()
                 ->getResult();
         }
