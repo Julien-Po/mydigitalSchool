@@ -48,7 +48,7 @@ class IngredientsController extends AbstractController
     #[Route('admin/ingredients', name : 'display_ingredients', methods:['GET'])]
     public function displayIngredient( IngredientsRepository $repository) : Response 
     {
-        $ingredients = $repository->findAll();
+        $ingredients = $repository->findIngredients();
 
         return $this->render('ingredients/displayingredients.html.twig', [
             'ingredients'=>$ingredients

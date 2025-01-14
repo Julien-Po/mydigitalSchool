@@ -44,20 +44,17 @@ class IngredientsRepository extends ServiceEntityRepository
         }      
     }
 
-    //    /**
-    //     * @return Ingredients[] Returns an array of Ingredients objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('i')
-    //            ->andWhere('i.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('i.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+       /**
+        * @return Ingredients[] Returns an array of Ingredients objects
+        */
+       public function findIngredients(): array
+       {
+           return $this->createQueryBuilder('i')
+               ->where('i.id <= 100000')
+               ->getQuery()
+               ->getResult()
+           ;
+       }
 
     //    public function findOneBySomeField($value): ?Ingredients
     //    {
