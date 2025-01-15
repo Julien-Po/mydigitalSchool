@@ -56,6 +56,16 @@ class IngredientsRepository extends ServiceEntityRepository
         }
         
 
+        public function findIngredientswGenre(): array
+{
+    return $this->createQueryBuilder('i')
+        ->leftJoin('i.genre', 'g') // Jointure pour inclure le genre
+        ->addSelect('g')          // Inclure également les données du genre
+        ->getQuery()
+        ->getResult();
+}
+
+
     //    public function findOneBySomeField($value): ?Ingredients
     //    {
     //        return $this->createQueryBuilder('i')

@@ -53,7 +53,7 @@ class AdminRecipesController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre ingredient a été supprimé avec succès !'
+                'Votre recette a été supprimé avec succès !'
             );
 
         return $this->redirectToRoute('view_recipes');    

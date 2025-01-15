@@ -64,8 +64,8 @@ class RecipesController extends AbstractController
             }
         }
     
-        $ingredients = $ingredientsRepository->findAll();
-        $genres = $genreRepository->findAll();
+        $ingredients = $ingredientsRepository->findIngredientswGenre();
+        $genres = $genreRepository->findGenre();
 
         return $this->render('recipes/new.html.twig', [
             'type' => $type,
@@ -87,7 +87,7 @@ class RecipesController extends AbstractController
         
                     $this->addFlash(
                         'success',
-                        'Votre ingredient a été supprimé avec succès !'
+                        'Votre recette a été supprimé avec succès !'
                     );
         
             }
