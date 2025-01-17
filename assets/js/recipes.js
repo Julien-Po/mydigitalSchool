@@ -1,47 +1,3 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Choisissez vos ingrédients{% endblock %}
-
-{% block main %}
-<h1 class="new textStyle">Choisissez vos ingrédients</h1>
-
-<div class="searchInput textStyle new">
-    <label for="genre-select" class="spacing">Filtrer par genre :</label>
-    <select id="genre-select">
-        <option value="all">Tous</option>
-        {% for genre in genres %}
-            <option value="{{ genre.id }}">{{ genre.name }}</option>
-        {% endfor %}
-    </select>
-</div>
-{{ type }}
-<div class="alignRecipes">
-    <div class="ingredients-container">
-        <form id="ingredients-form" action="{{ path('app_recipes', {'type': type }) }}" method="post">
-            <div class="cards-container" id="ingredients-container">
-                {% for ingredient in ingredients %}
-                    <div class="card" data-genre="{{ ingredient.genre.id }}">
-                        <label>
-                        <h2 for="">{{ ingredient.name }}</h2>
-                        <img src="{{ asset('assets/upload_directory/' ~ ingredient.image) }}" alt="{{ ingredient.name }}">
-                        <input type="checkbox" name="ingredients[]" value="{{ ingredient.id }}" class="ingredient-checkbox">
-                        </label>
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="recipesSubmit">
-                <input type="submit" class="button">
-            </div>
-        </form>
-    </div>
-    
-    {# <div id="selected-ingredients-container">
-        <h2 class="textStyle">Panier</h2>
-        <ul id="selected-ingredients-list" class="textStyle"></ul>
-    </div>
-</div> #}
-
-<script>
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('ingredients-form');
     const checkboxes = form.querySelectorAll('.ingredient-checkbox');
@@ -87,5 +43,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     filterIngredientsByGenre();
 });
-</script>
-{% endblock %}
