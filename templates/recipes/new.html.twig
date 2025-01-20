@@ -14,7 +14,6 @@
         {% endfor %}
     </select>
 </div>
-{{ type }}
 <div class="alignRecipes">
     <div class="ingredients-container">
         <form id="ingredients-form" action="{{ path('app_recipes', {'type': type }) }}" method="post">
@@ -52,6 +51,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', () => {
+                const label = checkbox.closest('label');
+            const image = label.querySelector('img');
+
+            if (checkbox.checked) {
+                image.classList.add('selected-image');
+            } else {
+                image.classList.remove('selected-image');
+            }
             updateSelectedIngredients();
         });
     });

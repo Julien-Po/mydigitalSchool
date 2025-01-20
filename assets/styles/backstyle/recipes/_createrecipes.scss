@@ -23,6 +23,10 @@
   }
 }
 
+.selected-image {
+  filter: brightness(0.5) sepia(1) hue-rotate(200deg);
+  transition: filter 0.3s ease;
+}
 
 .alignRecipes {
     display: flex;
