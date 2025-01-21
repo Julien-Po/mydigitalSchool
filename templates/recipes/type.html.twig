@@ -13,9 +13,9 @@
     </ul>
 </nav>
 
-<h2 class="title">Mes Recettes</h2>
+<h2 class="title lessleft">Mes Recettes</h2>
 
-<h3 class="title">Entrées</h3>
+<h3 class="title lessleft">Entrées</h3>
 <div class="cards-container">
     {% if recipes is not empty %}
         {% for recipe in recipes %}
@@ -31,11 +31,11 @@
             {% endif %}
         {% endfor %}
     {% else %}
-        <p class="default-text">Vous n'avez pas encore commandé d'entrée</p>
+        <p class="default-text lessleft">Vous n'avez pas encore commandé d'entrée</p>
     {% endif %}
 </div>
 
-<h3 class="title">Plats</h3>
+<h3 class="title lessleft">Plats</h3>
 <div class="cards-container">
     {% if recipes is not empty %}
         {% for recipe in recipes %}
@@ -51,11 +51,11 @@
             {% endif %}
         {% endfor %}
     {% else %}
-        <p class="default-text">Vous n'avez pas encore commandé de plat</p>
+        <p class="default-text lessleft">Vous n'avez pas encore commandé de plat</p>
     {% endif %}
 </div>
 
-<h3 class="title">Desserts</h3>
+<h3 class="title lessleft">Desserts</h3>
 <div class="cards-container">
     {% if recipes is not empty %}
         {% for recipe in recipes %}
@@ -71,7 +71,7 @@
             {% endif %}
         {% endfor %}
     {% else %}
-        <p class="default-text">Vous n'avez pas encore commandé de dessert</p>
+        <p class="default-text lessleft">Vous n'avez pas encore commandé de dessert</p>
     {% endif %}
 </div>
 
