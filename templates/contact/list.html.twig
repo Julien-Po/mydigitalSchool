@@ -3,10 +3,10 @@
 {% block title %}Liste des Contacts{% endblock %}
 
 {% block main %}
-    <h1 class="spacingTop title">Liste des Contacts</h1>
+    <h1 class="spacingTop title left">Liste des Contacts</h1>
 
     {% if contacts is empty %}
-        <p>Aucun contact trouvé.</p>
+        <p class="whitecolor left">Aucun contact trouvé.</p>
     {% else %}
         <div class="cards-container spacingTop">
             {% for contact in contacts %}

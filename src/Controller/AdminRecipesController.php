@@ -63,7 +63,7 @@ class AdminRecipesController extends AbstractController
     public function displayRecipes(RecipesRepository $repository) : Response
 
     {
-        $recipes = $repository->findAll();
+        $recipes = $repository->findRecipes();
 
         return $this->render('recipes/displayrecipes.html.twig', [
             'recipes'=>$recipes
