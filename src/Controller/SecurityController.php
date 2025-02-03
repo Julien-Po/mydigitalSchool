@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Form\RegistrationType;
 use App\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -15,15 +16,20 @@ use Doctrine\ORM\EntityManagerInterface;
 class SecurityController extends AbstractController
 {
     #[Route('/connexion', name: 'app_connexion', methods:['GET', 'POST'])]
-    public function index(AuthenticationUtils $authenticationUtils): Response
+    public function index(AuthenticationUtils $authenticationUtils, TranslatorInterface $translator): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        if ($error) {
+            $customError = $translator->trans('Identifiants incorrects, veuillez vérifier votre adresse email et mot de passe.', [], 'messages');
+        } else {
+            $customError = null;
+        }
+
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
-            'error'         => $error,
-        ]);
+            'error' => $customError,        ]);
     }
 
 #[Route('/deconnexion', name:"app_deconnexion")]    

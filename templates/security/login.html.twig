@@ -6,7 +6,7 @@
 <div class="container">
     <div class="centerPage">
         {% if error %}
-            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <div class="title errorLogin">{{ error }}</div>
         {% endif %}
         <form action="{{ path('app_connexion') }}" method="post">
             <div class="new">

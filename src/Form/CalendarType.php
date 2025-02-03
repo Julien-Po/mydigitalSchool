@@ -37,7 +37,7 @@ class CalendarType extends AbstractType
                 'constraints' => [
                     new GreaterThanOrEqual([
                         'value' => $twoWeeksLater,
-                        'message' => 'La date de début doit être au moins deux semaines à partir d\'aujourd\'hui.'
+                        'message' => 'La date de début doit être au moins deux semaines à partir d\'aujourd\'hui. Le restaurant est fermé le lundi.'
                     ]),
                     new NoMonday()
                 ]

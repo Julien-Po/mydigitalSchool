@@ -49,20 +49,21 @@ class CalendarController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager, RecipesRepository $recipesRepository): Response
     {
         $calendar = new Calendar();
+        $user = $this->getUser();   
+        
         // $recipeId = $request->query->get('recipe_id'); // Utilisez 'recipe_id'
-        $user = $this->getUser();
 
         $form = $this->createForm(CalendarType::class, $calendar);
         $form->handleRequest($request);
     
-        if ($form->isSubmitted() && $form->isValid()) {
-            $calendar
-                ->setUser($user);
-            $entityManager->persist($calendar);
-            $entityManager->flush();
-    
-            return $this->redirectToRoute('app_pay', [], Response::HTTP_SEE_OTHER);
-        }
+       if ($form->isSubmitted()) {
+    if ($form->isValid()) {
+        $calendar->setUser($user);
+        $entityManager->persist($calendar);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_pay', [], Response::HTTP_FOUND);
+    } 
+}
     
         return $this->render('calendar/new.html.twig', [
             'calendar' => $calendar,

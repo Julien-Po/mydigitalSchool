@@ -1,11 +1,17 @@
 
 {% block main %}
-<h1 class="title top">Créer un nouveau calendrier</h1>
+<h1 class="title top">Sélectionnez une date</h1>
 
 {{ form_start(form) }}
+
+    <div class="errorResa title">
+        {{ form_errors(form.start) }}
+    </div>
+
     <div class="spacing ">
         {{ form_label(form.title) }}
     </div>
+
     <div class="inputSpacing">
         {{ form_widget(form.title) }}
     </div>

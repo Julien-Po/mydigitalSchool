@@ -58,17 +58,4 @@ class AdminRecipesController extends AbstractController
 
         return $this->redirectToRoute('view_recipes');    
     }
-
-    #[Route('/recipes', name :'view_recipes')]
-    public function displayRecipes(RecipesRepository $repository) : Response
-
-    {
-        $recipes = $repository->findRecipes();
-
-        return $this->render('recipes/displayrecipes.html.twig', [
-            'recipes'=>$recipes
-        ]);
-    }
-    
-
 }

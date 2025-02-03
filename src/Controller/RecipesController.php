@@ -75,6 +75,16 @@ class RecipesController extends AbstractController
         ]);
     }
     
+    #[Route('/admin/recipes', name :'view_recipes')]
+    public function displayRecipes(RecipesRepository $repository) : Response
+
+    {
+        $recipes = $repository->findRecipes();
+
+        return $this->render('recipes/displayrecipes.html.twig', [
+            'recipes'=>$recipes
+        ]);
+    }
 
     #[Route('/recipes/delete/{id}', name : 'delete_recipes', methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Recipes $recipes) : Response
