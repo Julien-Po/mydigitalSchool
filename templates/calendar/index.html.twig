@@ -32,10 +32,14 @@
                 events: {{data|raw}},
                 editable: true,
                 eventContent: function(arg) {
-                let customContent = document.createElement('div');
-                customContent.classList.add('fc-event-title');
-                customContent.innerHTML = `<div>${arg.event.title}</div><div>${arg.event.extendedProps.description}</div>`;
-                return { domNodes: [customContent] };
+                let link = document.createElement('a');
+                let clientId = arg.event.extendedProps.clientID || arg.event.extendedProps.clientId;
+                link.href = `control/recipesByUser/${arg.event.extendedProps.clientID}`; 
+                console.log(arg.event.extendedProps.clientId);
+                link.classList.add('fc-event-title');
+                link.innerHTML = `<div>${arg.event.title}</div><div>${arg.event.extendedProps.description}</div>`;
+                console.log(arg.event.extendedProps);
+                return { domNodes: [link] };
             }
         })
 
